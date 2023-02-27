@@ -1,28 +1,18 @@
 package com.example.galleryservice.models;
 
+import lombok.Data;
+
 import java.util.List;
 
+@Data
 public class Gallery {
     private int id;
-    private List<Object> images;
+
+    // TODO: Check how to keep other domain types
+    private String images;
 
     public Gallery(int id) {
         this.id = id;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public List<Object> getImages() {
-        return images;
-    }
-
-    public void setImages(List<Object> images) {
-        this.images = images;
-    }
 }
