@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gallery-service
+  labels:
+    app: gallery-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gallery-service
+  template:
+    metadata:
+      labels:
+        app: gallery-service
+    spec:
+      containers:
+        - name: gallery-service
+          imagePullPolicy: Never
+          image: yd/gallery-service:latest

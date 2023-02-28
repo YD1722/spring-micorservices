@@ -4,7 +4,7 @@ services:
     build:
       context: ./gallery-service
       dockerfile: Dockerfile
-    image: gallery-service:latest
+    image: yd/gallery-service:latest
     ports:
       - "8100:8100"
     networks:
@@ -14,7 +14,7 @@ services:
     build:
       context: ./image-service
       dockerfile: Dockerfile
-    image: image-service:latest
+    image: yd/image-service:latest
     ports:
       - "8200:8200"
     networks:

@@ -19,9 +19,9 @@ public class ImageService {
     public String getImages() {
 
         try {
-            HttpRequest httpRequest = HttpRequest.newBuilder().uri(new URI(appConfig.getImageServiceUrl() + "/images")).GET().build();
-
             // TODO: How to change type of the http response
+
+            HttpRequest httpRequest = HttpRequest.newBuilder().uri(new URI(appConfig.getImageServiceUrl() + "/images")).GET().build();
             HttpResponse<String> response = HttpClient.newHttpClient().send(httpRequest, HttpResponse.BodyHandlers.ofString());
 
             return response.body();
