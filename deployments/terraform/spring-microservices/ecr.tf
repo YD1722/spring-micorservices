@@ -1,6 +1,5 @@
 module "ecr_image_service_repo" {
-  source  = "terraform-aws-modules/ecr/aws//examples/complete"
-  version = "1.6.0"
+  source          = "../modules/ecr"
   repository_name = "image_service_repo"
   tags = {
     Terraform   = "true"
@@ -9,8 +8,7 @@ module "ecr_image_service_repo" {
 }
 
 module "ecr_gallery_service_repo" {
-  source  = "terraform-aws-modules/ecr/aws//examples/complete"
-  version = "1.6.0"
+  source          = "../modules/ecr"
   repository_name = "gallery_service_repo"
   tags = {
     Terraform   = "true"
