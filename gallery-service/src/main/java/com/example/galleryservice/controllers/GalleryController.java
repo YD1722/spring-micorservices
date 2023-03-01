@@ -15,6 +15,7 @@ public class GalleryController {
     @Autowired
     private Environment env;
 
+    @Autowired
     private ImageService imageService;
 
     public GalleryController(ImageService imageService) {

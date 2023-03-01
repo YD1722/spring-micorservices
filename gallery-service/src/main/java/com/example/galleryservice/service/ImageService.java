@@ -1,6 +1,7 @@
 package com.example.galleryservice.service;
 
-import com.example.galleryservice.AppConfig;
+import com.example.galleryservice.config.AppConfig;
+import com.example.galleryservice.models.NotificationItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,9 @@ public class ImageService {
     @Autowired
     AppConfig appConfig;
 
+    @Autowired
+    INotificationService notificationService;
+
     public String getImages() {
 
         try {
@@ -23,6 +27,8 @@ public class ImageService {
 
             HttpRequest httpRequest = HttpRequest.newBuilder().uri(new URI(appConfig.getImageServiceUrl() + "/images")).GET().build();
             HttpResponse<String> response = HttpClient.newHttpClient().send(httpRequest, HttpResponse.BodyHandlers.ofString());
+
+            sendNotification(response.body());
 
             return response.body();
         } catch (URISyntaxException e) {
@@ -34,5 +40,9 @@ public class ImageService {
         }
 
         return "";
+    }
+
+    public void sendNotification(String message) {
+        notificationService.sendNotification(new NotificationItem(message));
     }
 }

@@ -18,6 +18,7 @@
         <module>image-service</module>
         <module>service-registry</module>
         <module>gateway</module>
+        <module>image-processing-service</module>
     </modules>
 
     <properties>

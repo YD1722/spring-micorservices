@@ -1,4 +1,4 @@
-package com.example.galleryservice;
+package com.example.galleryservice.config;
 
 import lombok.Getter;
 import lombok.Setter;
