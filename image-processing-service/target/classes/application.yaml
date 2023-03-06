@@ -1,0 +1,4 @@
+rabbit:
+  exchange: spring
+  queueName: spring-q
+  bindingKey: spring-bk

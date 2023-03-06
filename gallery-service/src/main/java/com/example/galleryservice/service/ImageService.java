@@ -2,6 +2,8 @@ package com.example.galleryservice.service;
 
 import com.example.galleryservice.config.AppConfig;
 import com.example.galleryservice.models.NotificationItem;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,21 +16,24 @@ import java.net.http.HttpResponse;
 
 @Service
 public class ImageService {
+    Logger logger = LoggerFactory.getLogger(ImageService.class);
     @Autowired
     AppConfig appConfig;
 
-    @Autowired
-    INotificationService notificationService;
+//    @Autowired
+//    INotificationService notificationService;
 
     public String getImages() {
 
         try {
             // TODO: How to change type of the http response
+            String externalUrl = appConfig.getImageServiceUrl() + "/images";
 
-            HttpRequest httpRequest = HttpRequest.newBuilder().uri(new URI(appConfig.getImageServiceUrl() + "/images")).GET().build();
+            logger.info("EXTERNAL_URL : " + externalUrl);
+            HttpRequest httpRequest = HttpRequest.newBuilder().uri(new URI(externalUrl)).GET().build();
             HttpResponse<String> response = HttpClient.newHttpClient().send(httpRequest, HttpResponse.BodyHandlers.ofString());
 
-            sendNotification(response.body());
+//            sendNotification(response.body());
 
             return response.body();
         } catch (URISyntaxException e) {
@@ -42,7 +47,7 @@ public class ImageService {
         return "";
     }
 
-    public void sendNotification(String message) {
-        notificationService.sendNotification(new NotificationItem(message));
-    }
+//    public void sendNotification(String message) {
+//        notificationService.sendNotification(new NotificationItem(message));
+//    }
 }

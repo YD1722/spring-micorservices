@@ -1,0 +1,173 @@
+{
+    "containerDefinitions": [
+    {
+      "name": "gallery-service",
+      "image": "008744601422.dkr.ecr.ap-northeast-1.amazonaws.com/gallery-service:latest",
+      "cpu": 0,
+      "portMappings": [
+        {
+          "containerPort": 8100,
+          "hostPort": 8100,
+          "protocol": "tcp"
+        }
+      ],
+      "essential": true,
+      "environment": [
+        {
+          "name": "IMAGE_SERVICE_URL",
+          "value": "http://image-service.spring-microservices:8200"
+        }
+      ],
+      "mountPoints": [],
+      "volumesFrom": [],
+      "dependsOn": [
+        {
+          "containerName": "envoy",
+          "condition": "HEALTHY"
+        }
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-create-group": "true",
+          "awslogs-group": "/ecs/gallery-service",
+          "awslogs-region": "ap-northeast-1",
+          "awslogs-stream-prefix": "ecs"
+        }
+      }
+    },
+    {
+      "name": "envoy",
+      "image": "840364872350.dkr.ecr.ap-northeast-1.amazonaws.com/aws-appmesh-envoy:v1.25.1.0-prod",
+      "cpu": 0,
+      "memory": 500,
+      "portMappings": [],
+      "essential": true,
+      "environment": [
+        {
+          "name": "APPMESH_VIRTUAL_NODE_NAME",
+          "value": "mesh/spring-ms-mesh/virtualNode/gallery-service-1"
+        }
+      ],
+      "mountPoints": [],
+      "volumesFrom": [],
+      "user": "1337",
+      "healthCheck": {
+        "command": [
+          "CMD-SHELL",
+          "curl -s http://localhost:9901/server_info | grep state | grep -q LIVE"
+        ],
+        "interval": 5,
+        "timeout": 2,
+        "retries": 3,
+        "startPeriod": 10
+      }
+    }
+  ],
+
+
+  "family": "gallery-service",
+  "taskRoleArn": "arn:aws:iam::008744601422:role/AWSAppMeshAllAccess",
+  "executionRoleArn": "arn:aws:iam::008744601422:role/ecsTaskExecutionRole",
+  "networkMode": "awsvpc",
+  "revision": 13,
+  "volumes": [],
+  "status": "ACTIVE",
+  "requiresAttributes": [
+    {
+      "name": "ecs.capability.execution-role-awslogs"
+    },
+    {
+      "name": "com.amazonaws.ecs.capability.ecr-auth"
+    },
+    {
+      "name": "com.amazonaws.ecs.capability.docker-remote-api.1.17"
+    },
+    {
+      "name": "com.amazonaws.ecs.capability.task-iam-role"
+    },
+    {
+      "name": "ecs.capability.aws-appmesh"
+    },
+    {
+      "name": "ecs.capability.container-health-check"
+    },
+    {
+      "name": "ecs.capability.execution-role-ecr-pull"
+    },
+    {
+      "name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
+    },
+    {
+      "name": "ecs.capability.task-eni"
+    },
+    {
+      "name": "com.amazonaws.ecs.capability.docker-remote-api.1.29"
+    },
+    {
+      "name": "com.amazonaws.ecs.capability.logging-driver.awslogs"
+    },
+    {
+      "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
+    },
+    {
+      "name": "ecs.capability.container-ordering"
+    }
+  ],
+  "placementConstraints": [],
+  "compatibilities": [
+    "EC2",
+    "FARGATE"
+  ],
+  "requiresCompatibilities": [
+    "FARGATE"
+  ],
+  "cpu": "512",
+  "memory": "1024",
+  "proxyConfiguration": {
+    "type": "APPMESH",
+    "containerName": "envoy",
+    "properties": [
+      {
+        "name": "ProxyIngressPort",
+        "value": "15000"
+      },
+      {
+        "name": "AppPorts",
+        "value": "8100"
+      },
+      {
+        "name": "EgressIgnoredIPs",
+        "value": "169.254.170.2,169.254.169.254"
+      },
+      {
+        "name": "IgnoredGID",
+        "value": ""
+      },
+      {
+        "name": "EgressIgnoredPorts",
+        "value": ""
+      },
+      {
+        "name": "IgnoredUID",
+        "value": "1337"
+      },
+      {
+        "name": "ProxyEgressPort",
+        "value": "15001"
+      }
+    ]
+  },
+  "runtimePlatform": {
+    "cpuArchitecture": "X86_64",
+    "operatingSystemFamily": "LINUX"
+  },
+  "registeredAt": "2023-03-05T17:25:45.019Z",
+  "registeredBy": "arn:aws:iam::008744601422:user/YD",
+  "tags": [
+    {
+      "key": "goal",
+      "value": "to-be-equal"
+    }
+  ]
+}

@@ -19,6 +19,11 @@ services:
       - "8200:8200"
     networks:
       - spring-cloud-network
+  rabbitmq:
+    image: rabbitmq:management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
 networks:
   spring-cloud-network:
     driver: bridge

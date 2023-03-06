@@ -1,0 +1,6 @@
+AWS /ECS writing
++ https://stackoverflow.com/questions/61265108/aws-ecs-fargate-resourceinitializationerror-unable-to-pull-secrets-or-registry
+path based routing - not supported in ALB
+https://stackoverflow.com/questions/42735328/aws-ecs-restart-service-with-the-same-task-definition-and-image-with-no-downtime
+https://www.baeldung.com/spring-boot-controllers-add-prefix
+
