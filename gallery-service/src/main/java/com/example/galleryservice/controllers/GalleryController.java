@@ -23,11 +23,16 @@ public class GalleryController {
     }
 
     @GetMapping("/")
+    public String home_ping() {
+        return "Ping from Gallery Service running at port: " + env.getProperty("local.server.port");
+    }
+
+    @GetMapping("/gallery")
     public String home() {
         return "Hello from Gallery Service running at port: " + env.getProperty("local.server.port");
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/gallery/{id}")
     public Gallery getGallery(@PathVariable final int id) {
         Gallery gallery = new Gallery(id);
 

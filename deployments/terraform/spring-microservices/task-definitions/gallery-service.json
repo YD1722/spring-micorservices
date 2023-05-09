@@ -1,52 +1,34 @@
 {
-    "containerDefinitions": [
-    {
-      "name": "gallery-service",
-      "image": "008744601422.dkr.ecr.ap-northeast-1.amazonaws.com/gallery-service:latest",
-      "cpu": 0,
-      "portMappings": [
-        {
-          "containerPort": 8100,
-          "hostPort": 8100,
-          "protocol": "tcp"
-        }
-      ],
-      "essential": true,
-      "environment": [
-        {
-          "name": "IMAGE_SERVICE_URL",
-          "value": "http://image-service.spring-microservices:8200"
-        }
-      ],
-      "mountPoints": [],
-      "volumesFrom": [],
-      "dependsOn": [
-        {
-          "containerName": "envoy",
-          "condition": "HEALTHY"
-        }
-      ],
-      "logConfiguration": {
-        "logDriver": "awslogs",
-        "options": {
-          "awslogs-create-group": "true",
-          "awslogs-group": "/ecs/gallery-service",
-          "awslogs-region": "ap-northeast-1",
-          "awslogs-stream-prefix": "ecs"
-        }
-      }
-    },
+  "taskDefinitionArn": "arn:aws:ecs:ap-northeast-1:008744601422:task-definition/gateway:7",
+  "containerDefinitions": [
     {
       "name": "envoy",
       "image": "840364872350.dkr.ecr.ap-northeast-1.amazonaws.com/aws-appmesh-envoy:v1.25.1.0-prod",
       "cpu": 0,
       "memory": 500,
-      "portMappings": [],
+      "portMappings": [
+        {
+          "containerPort": 8100,
+          "hostPort": 8100,
+          "protocol": "tcp"
+        },
+        {
+          "containerPort": 9901,
+          "hostPort": 9901,
+          "protocol": "tcp"
+        }
+      ],
       "essential": true,
+      "entryPoint": [],
+      "command": [],
       "environment": [
         {
           "name": "APPMESH_VIRTUAL_NODE_NAME",
-          "value": "mesh/spring-ms-mesh/virtualNode/gallery-service-1"
+          "value": "mesh/modern-arts-mesh/virtualGateway/modern-arts-vgw"
+        },
+        {
+          "name": "APPMESH_RESOURCE_ARN",
+          "value": "mesh/modern-arts-mesh/virtualGateway/modern-arts-vgw"
         }
       ],
       "mountPoints": [],
@@ -60,23 +42,18 @@
         "interval": 5,
         "timeout": 2,
         "retries": 3,
-        "startPeriod": 10
+        "startPeriod": 60
       }
     }
   ],
-
-
-  "family": "gallery-service",
+  "family": "gateway",
   "taskRoleArn": "arn:aws:iam::008744601422:role/AWSAppMeshAllAccess",
   "executionRoleArn": "arn:aws:iam::008744601422:role/ecsTaskExecutionRole",
   "networkMode": "awsvpc",
-  "revision": 13,
+  "revision": 7,
   "volumes": [],
   "status": "ACTIVE",
   "requiresAttributes": [
-    {
-      "name": "ecs.capability.execution-role-awslogs"
-    },
     {
       "name": "com.amazonaws.ecs.capability.ecr-auth"
     },
@@ -85,9 +62,6 @@
     },
     {
       "name": "com.amazonaws.ecs.capability.task-iam-role"
-    },
-    {
-      "name": "ecs.capability.aws-appmesh"
     },
     {
       "name": "ecs.capability.container-health-check"
@@ -103,15 +77,6 @@
     },
     {
       "name": "com.amazonaws.ecs.capability.docker-remote-api.1.29"
-    },
-    {
-      "name": "com.amazonaws.ecs.capability.logging-driver.awslogs"
-    },
-    {
-      "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
-    },
-    {
-      "name": "ecs.capability.container-ordering"
     }
   ],
   "placementConstraints": [],
@@ -122,52 +87,12 @@
   "requiresCompatibilities": [
     "FARGATE"
   ],
-  "cpu": "512",
-  "memory": "1024",
-  "proxyConfiguration": {
-    "type": "APPMESH",
-    "containerName": "envoy",
-    "properties": [
-      {
-        "name": "ProxyIngressPort",
-        "value": "15000"
-      },
-      {
-        "name": "AppPorts",
-        "value": "8100"
-      },
-      {
-        "name": "EgressIgnoredIPs",
-        "value": "169.254.170.2,169.254.169.254"
-      },
-      {
-        "name": "IgnoredGID",
-        "value": ""
-      },
-      {
-        "name": "EgressIgnoredPorts",
-        "value": ""
-      },
-      {
-        "name": "IgnoredUID",
-        "value": "1337"
-      },
-      {
-        "name": "ProxyEgressPort",
-        "value": "15001"
-      }
-    ]
-  },
+  "cpu": "256",
+  "memory": "512",
   "runtimePlatform": {
-    "cpuArchitecture": "X86_64",
     "operatingSystemFamily": "LINUX"
   },
-  "registeredAt": "2023-03-05T17:25:45.019Z",
+  "registeredAt": "2023-03-06T14:35:43.192Z",
   "registeredBy": "arn:aws:iam::008744601422:user/YD",
-  "tags": [
-    {
-      "key": "goal",
-      "value": "to-be-equal"
-    }
-  ]
+  "tags": []
 }
