@@ -12,5 +12,4 @@ public class Gallery {
     public Gallery(int id) {
         this.id = id;
     }
-
 }

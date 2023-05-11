@@ -1,0 +1,45 @@
+services:
+  message-broker:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: local-rabbit-broker
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks:
+      - messaging
+
+  db:
+    image: postgres:15.2-alpine
+    container_name: postgres-db
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - '5432:5432'
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - messaging
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin4-container
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: yd@admin.com
+      PGADMIN_DEFAULT_PASSWORD: 123
+    ports:
+      - '5050:80'
+    volumes:
+      - pgadmindata:/var/lib/pgadmin
+
+volumes:
+  pgdata:
+  pgadmindata:
+
+networks:
+  messaging:
+    driver: bridge

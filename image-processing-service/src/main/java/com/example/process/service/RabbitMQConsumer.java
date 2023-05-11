@@ -1,12 +1,13 @@
 package com.example.process.service;
 
+import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
-import org.springframework.stereotype.Service;
 
-@Service
+@RabbitListener(queues = "${rabbit.queueName}")
 public class RabbitMQConsumer {
-    @RabbitListener(queues = "${rabbit.queueName}")
-    public void receivedMessage(String message) {
+
+    @RabbitHandler
+    public void receive(String message) {
         System.out.println("Received Message From RabbitMQ: " + message);
     }
 }
