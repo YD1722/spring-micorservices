@@ -4,9 +4,11 @@ import com.example.galleryservice.models.Gallery;
 import com.example.galleryservice.services.GalleryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/gallery")
 public class GalleryController {
 
     @Autowired
@@ -19,17 +21,18 @@ public class GalleryController {
         this.galleryService = galleryService;
     }
 
-    @GetMapping("/")
+    @GetMapping
     public String home_ping() {
         return "Ping from Gallery Service running at port: " + env.getProperty("local.server.port");
     }
 
-    @GetMapping("/gallery")
-    public String home() {
-        return "Hello from Gallery Service running at port: " + env.getProperty("local.server.port");
+    @PostMapping
+    public ResponseEntity<String> createGallery(@RequestBody Gallery gallery) {
+        galleryService.createGallery(gallery);
+        return ResponseEntity.ok("Gallery created successfully");
     }
 
-    @GetMapping("/gallery/{id}")
+    @GetMapping("/{id}")
     public Gallery getGallery(@PathVariable final int id) {
         Gallery gallery = new Gallery();
         gallery.setId(1);
@@ -40,7 +43,6 @@ public class GalleryController {
 
         return gallery;
     }
-
 
 
     // -------- Admin Area --------

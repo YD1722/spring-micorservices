@@ -1,7 +1,7 @@
 package com.example.galleryservice.services;
 
 import com.example.galleryservice.config.AppConfig;
-import com.example.galleryservice.models.Customer;
+import com.example.galleryservice.models.Gallery;
 import com.example.galleryservice.respository.GalleryRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,8 +24,8 @@ public class GalleryService {
     @Autowired
     GalleryRepository galleryRepository;
 
-    public void createGallery(Customer customer) {
-        galleryRepository.save(customer);
+    public void createGallery(Gallery gallery) {
+        galleryRepository.save(gallery);
     }
 
     public String getImages() {
