@@ -1,15 +1,21 @@
 package com.example.galleryservice.models;
 
-import lombok.Data;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Entity
+@Setter
+@Getter
 public class Gallery {
-    private int id;
+    @Id
+    @GeneratedValue
+    private long id;
+
+    private String name;
 
     // TODO: Check how to keep other domain types
     private String images;
-
-    public Gallery(int id) {
-        this.id = id;
-    }
 }

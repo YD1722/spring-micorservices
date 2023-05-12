@@ -20,6 +20,6 @@ spring:
           predicates:
             - Path=/image/**
         - id: gallery-service
-          uri: lb://GALLERY-SERVICE
+          uri: lb://gallery-service
           predicates:
             - Path=/gallery/**

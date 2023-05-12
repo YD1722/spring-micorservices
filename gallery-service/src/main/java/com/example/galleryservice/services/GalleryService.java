@@ -1,7 +1,8 @@
-package com.example.galleryservice.service;
+package com.example.galleryservice.services;
 
 import com.example.galleryservice.config.AppConfig;
-import com.example.galleryservice.models.NotificationItem;
+import com.example.galleryservice.models.Customer;
+import com.example.galleryservice.respository.GalleryRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,25 +16,29 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
 @Service
-public class ImageService {
-    Logger logger = LoggerFactory.getLogger(ImageService.class);
+public class GalleryService {
+    Logger logger = LoggerFactory.getLogger(GalleryService.class);
     @Autowired
     AppConfig appConfig;
 
-//    @Autowired
-//    INotificationService notificationService;
+    @Autowired
+    GalleryRepository galleryRepository;
+
+    public void createGallery(Customer customer) {
+        galleryRepository.save(customer);
+    }
 
     public String getImages() {
-
         try {
             // TODO: How to change type of the http response
             String externalUrl = appConfig.getImageServiceUrl() + "/images";
 
             logger.info("EXTERNAL_URL : " + externalUrl);
+
             HttpRequest httpRequest = HttpRequest.newBuilder().uri(new URI(externalUrl)).GET().build();
             HttpResponse<String> response = HttpClient.newHttpClient().send(httpRequest, HttpResponse.BodyHandlers.ofString());
 
-//            sendNotification(response.body());
+            //            sendNotification(response.body());
 
             return response.body();
         } catch (URISyntaxException e) {

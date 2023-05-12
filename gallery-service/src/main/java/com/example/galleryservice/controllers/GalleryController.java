@@ -1,8 +1,7 @@
 package com.example.galleryservice.controllers;
 
 import com.example.galleryservice.models.Gallery;
-import com.example.galleryservice.models.Notification;
-import com.example.galleryservice.service.ImageService;
+import com.example.galleryservice.services.GalleryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.*;
@@ -14,10 +13,10 @@ public class GalleryController {
     private Environment env;
 
     @Autowired
-    private ImageService imageService;
+    private GalleryService galleryService;
 
-    public GalleryController(ImageService imageService) {
-        this.imageService = imageService;
+    public GalleryController(GalleryService galleryService) {
+        this.galleryService = galleryService;
     }
 
     @GetMapping("/")
@@ -32,18 +31,17 @@ public class GalleryController {
 
     @GetMapping("/gallery/{id}")
     public Gallery getGallery(@PathVariable final int id) {
-        Gallery gallery = new Gallery(id);
+        Gallery gallery = new Gallery();
+        gallery.setId(1);
 
         // TODO: Check ways of calling other services
-        String images = imageService.getImages();
+        String images = galleryService.getImages();
         gallery.setImages(images);
 
         return gallery;
     }
 
-    @PostMapping("/gallery/notification")
-    public void sendNotifications(Notification notification){
-    }
+
 
     // -------- Admin Area --------
     // This method should only be accessed by users with role of 'admin'

@@ -1,7 +1,7 @@
-package com.example.galleryservice.service;
+package com.example.imageservice.services;
 
-import com.example.galleryservice.config.RabbitMQConfig;
-import com.example.galleryservice.models.NotificationItem;
+import com.example.imageservice.config.RabbitMQConfig;
+import com.example.imageservice.models.NotificationItem;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
