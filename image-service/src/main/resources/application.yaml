@@ -1,4 +1,0 @@
-rabbit:
-  exchange: processor
-  queueName: image-processor
-  bindingKey: spring-bk

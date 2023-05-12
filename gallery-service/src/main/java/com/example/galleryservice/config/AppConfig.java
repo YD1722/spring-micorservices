@@ -10,16 +10,16 @@ import javax.annotation.PostConstruct;
 
 
 @Configuration
-@ConfigurationProperties(prefix = "external.service")
+@ConfigurationProperties(prefix = "app")
 @Getter
 @Setter
 public class AppConfig {
-    private String imageServiceUrl;
+    private String externalServiceImageServiceUrl;
 
     @PostConstruct
     public void postConstruct() {
         if (System.getenv(Constants.IMAGE_SERVICE_URL.name()) != null) {
-            this.imageServiceUrl = System.getenv(Constants.IMAGE_SERVICE_URL.name());
+            this.externalServiceImageServiceUrl = System.getenv(Constants.IMAGE_SERVICE_URL.name());
         }
     }
 }

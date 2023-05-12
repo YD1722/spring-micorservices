@@ -16,10 +16,10 @@ spring:
           enabled: true
       routes:
         - id: image-service
-          uri: lb://image-service
+          uri: lb://IMAGE-SERVICE
           predicates:
             - Path=/image/**
         - id: gallery-service
-          uri: lb://gallery-service
+          uri: lb://GALLERY-SERVICE
           predicates:
             - Path=/gallery/**
