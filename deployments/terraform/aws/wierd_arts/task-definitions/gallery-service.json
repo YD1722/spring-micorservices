@@ -1,0 +1,13 @@
+[
+  {
+    "name": "gallery-service",
+    "image": "008744601422.dkr.ecr.ap-south-1.amazonaws.com/gallery_service:latest",
+    "memory": 512,
+    "portMappings": [
+      {
+        "containerPort": 8100,
+        "hostPort": 8100
+      }
+    ]
+  }
+]
