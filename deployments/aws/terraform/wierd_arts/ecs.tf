@@ -44,6 +44,21 @@ module "ecs_service" {
           hostPort      = local.services.gallery_service.port
         }
       ]
+#      "environment": [
+#        {
+#          "name": "DATASOURCE_URL",
+#          "value": "jdbc:postgresql://${module.rds-aurora_postgresql.cluster_endpoint}"
+#        }, {
+#          "name": "DATASOURCE_USER",
+#          "value": "postgres"
+#        }, {
+#          "name": "DATASOURCE_PASS",
+#          "value": "${module.rds-aurora_postgresql.cluster_master_user_secret}"
+#        }, {
+#          "name" : "IMAGE_SERVICE_URL",
+#          "value" : "http://image-service:8200"
+#        }
+#      ],
     }
   }
 
