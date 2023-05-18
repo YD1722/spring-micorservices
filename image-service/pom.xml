@@ -51,6 +51,7 @@
     </dependencies>
 
     <build>
+        <finalName>image-service</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -61,12 +62,12 @@
 
     <profiles>
         <profile>
-            <id>spring-cloud</id>
+            <id>dev</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
-                <spring.profiles.active>spring-cloud</spring.profiles.active>
+                <spring.profiles.active>dev</spring.profiles.active>
             </properties>
         </profile>
         <profile>

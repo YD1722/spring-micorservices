@@ -23,7 +23,7 @@ module "ecs_cluster" {
 module "ecs_service" {
   source = "terraform-aws-modules/ecs/aws//modules/service"
 
-  name        = local.name
+  name        = local.services.gallery_service.name
   cluster_arn = module.ecs_cluster.arn
 
   cpu    = 256
@@ -44,21 +44,26 @@ module "ecs_service" {
           hostPort      = local.services.gallery_service.port
         }
       ]
-#      "environment": [
-#        {
-#          "name": "DATASOURCE_URL",
-#          "value": "jdbc:postgresql://${module.rds-aurora_postgresql.cluster_endpoint}"
-#        }, {
-#          "name": "DATASOURCE_USER",
-#          "value": "postgres"
-#        }, {
-#          "name": "DATASOURCE_PASS",
-#          "value": "${module.rds-aurora_postgresql.cluster_master_user_secret}"
-#        }, {
-#          "name" : "IMAGE_SERVICE_URL",
-#          "value" : "http://image-service:8200"
-#        }
-#      ],
+      "environment" : [
+        #              {
+        #                "name": "DATASOURCE_URL",
+        #                "value": "jdbc:postgresql://${module.rds-aurora_postgresql.cluster_endpoint}"
+        #              }, {
+        #                "name": "DATASOURCE_USER",
+        #                "value": "postgres"
+        #              }, {
+        #                "name": "DATASOURCE_PASS",
+        #                "value": "${module.rds-aurora_postgresql.cluster_master_user_secret}"
+        #              },
+        {
+          "name" : "spring.profiles.active",
+          "value" : "aws"
+        },
+        {
+          "name" : "IMAGE_SERVICE_URL",
+          "value" : "http://image-service:8200"
+        }
+      ],
     }
   }
 

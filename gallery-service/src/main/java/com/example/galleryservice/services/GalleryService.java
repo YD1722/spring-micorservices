@@ -30,10 +30,10 @@ public class GalleryService {
 
     public String getImages() {
         try {
-            // TODO: How to change type of the http response
             String externalUrl = appConfig.getExternalServiceImageServiceUrl() + "/images";
             logger.info("EXTERNAL_URL : " + externalUrl);
 
+            // TODO: How to change type of the http response
             HttpRequest httpRequest = HttpRequest.newBuilder().uri(new URI(externalUrl)).GET().build();
             HttpResponse<String> response = HttpClient.newHttpClient().send(httpRequest, HttpResponse.BodyHandlers.ofString());
 

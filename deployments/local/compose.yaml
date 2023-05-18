@@ -8,7 +8,7 @@ services:
       - "5672:5672"
       - "15672:15672"
     networks:
-      - networkyd
+      - wierd_arts
 
   db:
     image: postgres:15.2-alpine
@@ -23,7 +23,7 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
     networks:
-      - networkyd
+      - wierd_arts
 
   pgadmin:
     image: dpage/pgadmin4
@@ -37,11 +37,67 @@ services:
     volumes:
       - pgadmindata:/var/lib/pgadmin
     networks:
-      - networkyd
+      - wierd_arts
+
+  gateway:
+    container_name: gateway
+    build:
+      context: ../../gateway
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    networks:
+      - wierd_arts
+
+  service-registry:
+    container_name: service-registry
+    build:
+      context: ../../service-registry
+      dockerfile: Dockerfile
+    ports:
+      - 8761:8761
+    networks:
+      - wierd_arts
+
+  gallery-service:
+    container_name: gallery-service
+    build:
+      context: ../../gallery-service
+      dockerfile: Dockerfile
+    ports:
+      - 8100:8100
+    networks:
+      - wierd_arts
+    depends_on:
+      - db
+
+  image-service:
+    container_name: image-service
+    build:
+      context: ../../image-service
+      dockerfile: Dockerfile
+    ports:
+      - 8200:8200
+    networks:
+      - wierd_arts
+    depends_on:
+      - message-broker
+
+  image-processing-service:
+    container_name: image-processing-service
+    build:
+      context: ../../image-processing-service
+      dockerfile: Dockerfile
+    ports:
+      - 8400:8400
+    networks:
+      - wierd_arts
+    depends_on:
+      - message-broker
 
 volumes:
   pgdata:
   pgadmindata:
 
 networks:
-  networkyd:
+  wierd_arts:

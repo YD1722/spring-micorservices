@@ -1,3 +1,6 @@
+server:
+  port: 8400
+
 rabbit:
   exchange: spring
   queueName: spring-q
