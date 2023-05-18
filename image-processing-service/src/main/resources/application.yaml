@@ -2,6 +2,6 @@ server:
   port: 8400
 
 rabbit:
-  exchange: spring
-  queueName: spring-q
+  exchange: processor
+  queueName: image-processor
   bindingKey: spring-bk

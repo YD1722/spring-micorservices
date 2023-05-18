@@ -1,0 +1,73 @@
+services:
+  service-registry:
+    container_name: service-registry
+    build:
+      context: ../../service-registry
+      dockerfile: Dockerfile
+    ports:
+      - 8761:8761
+    networks:
+      - wierd_arts_proxy
+
+  gateway:
+    container_name: gateway
+    build:
+      context: ../../gateway
+      dockerfile: Dockerfile
+    environment:
+      - eureka.client.serviceUrl.defaultZone=http://service-registry:8761/eureka/
+    ports:
+      - 8080:8080
+    networks:
+      - wierd_arts_proxy
+    depends_on:
+      - service-registry
+
+  gallery-service:
+    container_name: gallery-service
+    build:
+      context: ../../gallery-service
+      dockerfile: Dockerfile
+    environment:
+      - eureka.client.serviceUrl.defaultZone=http://service-registry:8761/eureka/
+      - DATASOURCE_URL=jdbc:postgresql://datasource:5432/wierd_arts
+      - DATASOURCE_USER=postgres
+      - DATASOURCE_PASS=postgres
+      - IMAGE_SERVICE_URL=http://image-service:8200
+    ports:
+      - 8100:8100
+    networks:
+      - wierd_arts_proxy
+    depends_on:
+      - service-registry
+
+  image-service:
+    container_name: image-service
+    build:
+      context: ../../image-service
+      dockerfile: Dockerfile
+    environment:
+      - eureka.client.serviceUrl.defaultZone=http://service-registry:8761/eureka/
+    ports:
+      - 8200:8200
+    networks:
+      - wierd_arts_proxy
+    depends_on:
+      - service-registry
+
+  image-processing-service:
+    container_name: image-processing-service
+    build:
+      context: ../../image-processing-service
+      dockerfile: Dockerfile
+    ports:
+      - 8400:8400
+    networks:
+      - wierd_arts_proxy
+    depends_on:
+      - service-registry
+
+networks:
+  wierd_arts_proxy:
+    external:
+      name: wierd_arts_network

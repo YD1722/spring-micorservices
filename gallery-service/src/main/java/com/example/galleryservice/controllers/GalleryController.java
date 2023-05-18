@@ -21,11 +21,6 @@ public class GalleryController {
         this.galleryService = galleryService;
     }
 
-    @GetMapping
-    public String home_ping() {
-        return "Ping from Gallery Service running at port: " + env.getProperty("local.server.port");
-    }
-
     @PostMapping
     public ResponseEntity<String> createGallery(@RequestBody Gallery gallery) {
         galleryService.createGallery(gallery);
@@ -50,5 +45,10 @@ public class GalleryController {
     @RequestMapping("/admin")
     public String homeAdmin() {
         return "This is the admin area of Gallery service running at port: " + env.getProperty("local.server.port");
+    }
+
+    @GetMapping("/ping")
+    public String home_ping() {
+        return "Ping from Gallery Service running at port: " + env.getProperty("local.server.port");
     }
 }

@@ -6,6 +6,7 @@ import com.example.imageservice.models.NotificationItem;
 import com.example.imageservice.services.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,7 +15,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @RestController
-@RequestMapping("/gallery")
+@RequestMapping("/images")
 public class ImageController {
     @Autowired
     private Environment env;
@@ -22,12 +23,7 @@ public class ImageController {
     @Autowired
     private NotificationService notificationService;
 
-    @RequestMapping("/")
-    public String home() {
-        return "Hello from Image Service running at port: " + env.getProperty("local.server.port");
-    }
-
-    @RequestMapping("/images")
+    @GetMapping
     public List<Image> getImages() {
         List<Image> images = Arrays.asList(
                 new Image(1, "Treehouse of Horror V", "https://www.imdb.com/title/tt0096697/mediaviewer/rm3842005760"),
@@ -37,8 +33,13 @@ public class ImageController {
         return images;
     }
 
-    @PostMapping("/image/process")
+    @PostMapping("/process")
     public void uploadImages(ImageUploadRequest imageUploadRequest) {
         notificationService.sendNotification(new NotificationItem("image-upload"));
+    }
+
+    @GetMapping("/ping")
+    public String home() {
+        return "Hello from Image Service running at port: " + env.getProperty("local.server.port");
     }
 }
