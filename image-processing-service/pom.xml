@@ -64,12 +64,9 @@
 
     <profiles>
         <profile>
-            <id>dev</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
+            <id>aws</id>
             <properties>
-                <spring.profiles.active>dev</spring.profiles.active>
+                <spring.profiles.active>aws</spring.profiles.active>
             </properties>
         </profile>
     </profiles>

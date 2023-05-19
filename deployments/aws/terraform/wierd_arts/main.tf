@@ -6,7 +6,7 @@ locals {
       port : 8100
     },
     image_service = {
-      name : "gallery-service"
+      name : "image-service"
       port : 8200
     }
   }

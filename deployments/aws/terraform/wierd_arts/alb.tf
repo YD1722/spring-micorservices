@@ -17,10 +17,9 @@ module "alb" {
 
   http_tcp_listeners = [
     {
-      port               = 80
-      protocol           = "HTTP"
-      target_group_index = 0
-    },
+      port     = 80
+      protocol = "HTTP"
+    }
   ]
 
   target_groups = [
@@ -29,6 +28,23 @@ module "alb" {
       backend_protocol = "HTTP"
       backend_port     = local.services.gallery_service.port
       target_type      = "ip"
-    },
+    }
+  ]
+
+  http_tcp_listener_rules = [
+    {
+      priority = 1
+      actions  = [
+        {
+          type               = "forward"
+          target_group_index = 0
+        }
+      ]
+      conditions = [
+        {
+          path_patterns = ["/gallery", "/gallery/*"]
+        }
+      ]
+    }
   ]
 }
