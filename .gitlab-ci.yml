@@ -1,10 +1,8 @@
 stages:
+  - pre-build
   - build
+  - test
+  - deploy
 
-build:
-  stage: build
-  image: maven:latest
-  variables:
-    SPRING_PROFILES_ACTIVE: "aws"
-  script:
-    - mvn clean install -DskipTests
+include:
+  - local: '/.gitlab/build.yml'

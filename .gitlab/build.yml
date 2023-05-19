@@ -1,0 +1,17 @@
+.maven-build:
+  extends:
+    - .run-maven-goal
+  stage: build
+  variables:
+    MVN_GOALS: 'package'
+
+build-gallery-service:
+  extends: .maven-build
+  variables:
+    SERVICE_NAME: gallery-service
+
+.run-maven-goal:
+  image: maven
+  stage: build
+  script:
+    - python3 maven_exec.py $SERVICE_NAME $MVN_GOALS
