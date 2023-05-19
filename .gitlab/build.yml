@@ -1,17 +1,16 @@
-.maven-build:
-  extends:
-    - .run-maven-goal
-  stage: build
-  variables:
-    MVN_GOALS: 'package'
-
 build-gallery-service:
   extends: .maven-build
   variables:
     SERVICE_NAME: gallery-service
 
+.maven-build:
+  extends:
+    - .run-maven-goal
+  variables:
+    MVN_GOALS: 'package'
+
 .run-maven-goal:
   image: maven:latest
   stage: build
-    - chmod +x ./scripts/maven_exec.sh
+  script:
     - bash scripts/maven_exec.sh $SERVICE_NAME $MVN_GOALS
