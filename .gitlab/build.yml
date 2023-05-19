@@ -11,7 +11,7 @@ build-gallery-service:
     SERVICE_NAME: gallery-service
 
 .run-maven-goal:
-  image: maven
+  image: maven:latest
   stage: build
-  script:
-    - python3 maven_exec.py $SERVICE_NAME $MVN_GOALS
+    - chmod +x ./scripts/maven_exec.sh
+    - ./scripts/maven_exec.sh $SERVICE_NAME $MVN_GOALS
