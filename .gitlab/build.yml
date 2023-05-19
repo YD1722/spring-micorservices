@@ -14,4 +14,4 @@ build-gallery-service:
   stage: build
   script:
     - pwd
-    - bash scripts/maven_exec.sh $SERVICE_NAME $MVN_GOALS
+    - bash .gitlab/scripts/maven_exec.sh $SERVICE_NAME $MVN_GOALS
