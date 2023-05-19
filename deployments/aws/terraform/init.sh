@@ -4,8 +4,7 @@ export SPRING_PROFILES_ACTIVE=aws
 CURRENT_DIR=$(pwd)
 PROJECT_DIR=$(dirname "$(dirname "$(dirname "$PWD")")") # Set the project directory three folders up from the current directory
 
-#submodules=("gallery-service" "image-service")
-submodules=("image-service")
+submodules=("gallery-service" "image-service")
 
 for submodule in "${submodules[@]}"; do
   echo "Navigating into submodule: $submodule"
