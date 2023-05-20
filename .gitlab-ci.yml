@@ -1,13 +1,13 @@
+job:
+  tags:
+    - debug
+
 stages:
   - pre-build
   - build
   - test
   - post-build
   - deploy
-
-job:
-  tags:
-    - debug
 
 include:
   - local: '/.gitlab/build.yml'
