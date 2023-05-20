@@ -1,4 +1,4 @@
-# Wierd Arts - Unleash Your Creative Powers
+# Wierd Arts - Unleashing Dev and Ops Powers
 
 ## Description
 
@@ -23,3 +23,6 @@ Your dedication and expertise are highly appreciated.
 Wierd Arts is an independent project and is not affiliated with Kubernetes, Amazon Web Services (AWS), or GitLab. Kubernetes, AWS, and GitLab are registered trademarks of their respective owners.
 
 Enjoy exploring the limitless possibilities of art, technology, and creativity with Wierd Arts!
+
+## Tooling ref
+- list mvn phases with goals -> http://buildplan.jcgay.fr/usage.html
