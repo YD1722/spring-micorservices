@@ -15,7 +15,7 @@ build-image-processing-service:
 
 preparing-docker-images:
   image: docker:latest
-  stage: build
+  stage: post-build
   script:
     - bash .gitlab/scripts/docker.sh $SERVICE_NAME
 

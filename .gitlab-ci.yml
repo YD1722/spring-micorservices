@@ -2,6 +2,7 @@ stages:
   - pre-build
   - build
   - test
+  - post-build
   - deploy
 
 include:
