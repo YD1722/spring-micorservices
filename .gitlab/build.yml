@@ -2,16 +2,18 @@ build-gallery-service:
   extends: .maven-build
   variables:
     SERVICE_NAME: gallery-service
+  tags:
+    - debug
 
-build-image-service:
-  extends: .maven-build
-  variables:
-    SERVICE_NAME: image-service
-
-build-image-processing-service:
-  extends: .maven-build
-  variables:
-    SERVICE_NAME: image-processing-service
+#build-image-service:
+#  extends: .maven-build
+#  variables:
+#    SERVICE_NAME: image-service
+#
+#build-image-processing-service:
+#  extends: .maven-build
+#  variables:
+#    SERVICE_NAME: image-processing-service
 
 preparing-docker-images:
   image: docker:dind
@@ -20,6 +22,8 @@ preparing-docker-images:
     - sh .gitlab/scripts/docker.sh
   services:
     - docker:dind
+  tags:
+    - debug
 
 .maven-build:
   extends:

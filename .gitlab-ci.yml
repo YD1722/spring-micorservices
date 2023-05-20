@@ -1,7 +1,3 @@
-job:
-  tags:
-    - debug
-
 stages:
   - pre-build
   - build
