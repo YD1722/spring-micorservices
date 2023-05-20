@@ -14,9 +14,10 @@ build-image-processing-service:
     SERVICE_NAME: image-processing-service
 
 preparing-docker-images:
+  image: docker:dind
   stage: post-build
   script:
-    - bash .gitlab/scripts/docker.sh $SERVICE_NAME
+    - sh .gitlab/scripts/docker.sh $SERVICE_NAME
 
 .maven-build:
   extends:
