@@ -11,6 +11,8 @@ for service_dir in artifacts/*; do
     echo -e "$dockerfile_content" > Dockerfile
 
     pwd
+    ll
+    cat Dockerfile
 
 #    # Build the Docker image
 #    docker build \
