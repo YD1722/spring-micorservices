@@ -18,6 +18,8 @@ preparing-docker-images:
   stage: post-build
   script:
     - sh .gitlab/scripts/docker.sh $SERVICE_NAME
+  services:
+    - docker:dind
 
 .maven-build:
   extends:
