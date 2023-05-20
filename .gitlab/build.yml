@@ -34,6 +34,6 @@ preparing-docker-images:
     - cp $SERVICE_NAME/target/*.jar artifacts/$SERVICE_NAME/
   artifacts:
     when: on_success
-    expire_in: 1 hrs
+    expire_in: 10 min
     paths:
       - artifacts/
