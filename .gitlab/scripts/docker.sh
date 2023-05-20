@@ -10,14 +10,16 @@ for service_dir in artifacts/*; do
     dockerfile_content="FROM openjdk:17-alpine\nMAINTAINER yashodha.dev.space\nCOPY $service_name/$service_name.jar app.jar\nENTRYPOINT [\"java\", \"-jar\", \"/app.jar\"]"
     echo -e "$dockerfile_content" > Dockerfile
 
-    # Build the Docker image
-    docker build \
-      --build-arg SERVICE_NAME="$service_name" \
-      --tag "$tag" \
-      .
+    pwd
 
-    # Tag the Docker image dynamically
-    docker tag "$tag" "$ecr_tag"
+#    # Build the Docker image
+#    docker build \
+#      --build-arg SERVICE_NAME="$service_name" \
+#      --tag "$tag" \
+#      .
+#
+#    # Tag the Docker image dynamically
+#    docker tag "$tag" "$ecr_tag"
 
     # Clean up the Dockerfile
     rm Dockerfile
