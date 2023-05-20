@@ -17,7 +17,7 @@ preparing-docker-images:
   image: docker:dind
   stage: post-build
   script:
-    - sh .gitlab/scripts/docker.sh $SERVICE_NAME
+    - sh .gitlab/scripts/docker.sh
   services:
     - docker:dind
 
