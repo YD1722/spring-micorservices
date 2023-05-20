@@ -17,8 +17,7 @@ preparing-docker-images:
   image: docker:latest
   stage: build
   script:
-    - pwd
-#    - bash .gitlab/scripts/docker.sh $SERVICE_NAME
+    - bash .gitlab/scripts/docker.sh $SERVICE_NAME
 
 .maven-build:
   extends:
