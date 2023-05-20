@@ -5,5 +5,8 @@ stages:
   - post-build
   - deploy
 
+tags:
+  - debug
+
 include:
   - local: '/.gitlab/build.yml'
