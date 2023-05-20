@@ -30,7 +30,7 @@ preparing-docker-images:
   stage: build
   script:
     - bash .gitlab/scripts/maven.sh $SERVICE_NAME $MVN_GOALS
-    - mkdir -p artifacts
+    - mkdir -p artifacts/$SERVICE_NAME
     - cp $SERVICE_NAME/target/*.jar artifacts/$SERVICE_NAME/
   artifacts:
     when: on_success
