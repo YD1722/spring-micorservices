@@ -8,9 +8,11 @@ for service_dir in artifacts/*; do
 
     # Print the service name
     echo "Service Name: $service_name"
+    ll
 
     # Build the Docker image with the provided SERVICE_NAME as a build argument
-    docker build --build-arg SERVICE_NAME="$service_name" -t "$tag" "$service_dir"
+    docker build --build-arg SERVICE_NAME="$service_name" -t "$tag" -f .gitlab/Dockerfile .
+
 
     # Tag the Docker image dynamically
     docker tag "$tag" "$ecr_tag"
