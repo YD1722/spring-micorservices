@@ -13,6 +13,13 @@ build-image-processing-service:
   variables:
     SERVICE_NAME: image-processing-service
 
+preparing-docker-images:
+  image: docker:latest
+  stage: build
+  script:
+    - pwd
+#    - bash .gitlab/scripts/docker.sh $SERVICE_NAME
+
 .maven-build:
   extends:
     - .run-maven-goal
@@ -25,8 +32,7 @@ build-image-processing-service:
   script:
     - bash .gitlab/scripts/maven.sh $SERVICE_NAME $MVN_GOALS
     - mkdir -p artifacts
-    - cp $SERVICE_NAME/target/*.jar artifacts/
-    - docker build -t ${SERVICE_NAME}:latest -t 008744601422.dkr.ecr.ap-south-1.amazonaws.com/${SERVICE_NAME}:latest -f Dockerfile artifacts/
+    - cp $SERVICE_NAME/target/*.jar artifacts/$SERVICE_NAME/
   artifacts:
     when: on_success
     expire_in: 1 hrs

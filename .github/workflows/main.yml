@@ -5,6 +5,7 @@ on:
     branches:
       - master
       - dev
+      - f-shady-ops
   pull_request:
     branches:
       - master
