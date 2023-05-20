@@ -5,8 +5,8 @@
   "product_version": "3.11.9",
   "users": [
     {
-      "name": "guest",
-      "password_hash": "MhCOofAO/ALKrUFclXLdFh6IrnOVFDjEnidvz4v6hevR5Edd",
+      "name": "yd123",
+      "password_hash": "MND6sO8lq54YZyw+owxvplIkJ1ZOWTe4k4hwuFzu5AoPwO69",
       "hashing_algorithm": "rabbit_password_hashing_sha256",
       "tags": [
         "administrator"
@@ -21,7 +21,7 @@
   ],
   "permissions": [
     {
-      "user": "guest",
+      "user": "yd123",
       "vhost": "/",
       "configure": ".*",
       "write": ".*",
