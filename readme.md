@@ -6,7 +6,7 @@ Wierd Arts is not just an ordinary app -
 it's my personal playground where my dev skills and ops skills collide. 
 Here, I am exploring and applying all the cool stuff I'm learning in my journey.
 
-## Features
+## DevOps Journey so far
 
 - **K8 Deployments**: Wierd Arts empowers you to effortlessly deploy your applications on Kubernetes clusters. Whether you're a beginner or an experienced user, this app will enhance your understanding of Kubernetes and provide a seamless deployment experience.
 
@@ -17,8 +17,6 @@ Here, I am exploring and applying all the cool stuff I'm learning in my journey.
 ## Acknowledgments
 I would like to express my gratitude to the open-source community. 
 Your dedication and expertise are highly appreciated.
-
-I would also like to take a moment to thank myself for never giving up.
 
 ## Disclaimer
 
