@@ -1,19 +1,25 @@
 name: GitlabSync
 
-on: 
-  - push
-  - delete
+on:
+  push:
+    branches:
+      - master
+      - dev
+  pull_request:
+    branches:
+      - master
+      - dev
 
 jobs:
   sync:
     runs-on: ubuntu-latest
     name: Git Repo Sync
     steps:
-    - uses: actions/checkout@v2
-      with:
-        fetch-depth: 0
-    - uses: wangchucheng/git-repo-sync@v0.1.0
-      with:
-        target-url: https://gitlab.com/yashotech/spring-micorservices.git
-        target-username: ${{secrets.GITLAB_USERNAME}}
-        target-token: ${{secrets.GITLAB_TOKEN}}
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: wangchucheng/git-repo-sync@v0.1.0
+        with:
+          target-url: https://gitlab.com/yashotech/spring-micorservices.git
+          target-username: ${{secrets.GITLAB_USERNAME}}
+          target-token: ${{secrets.GITLAB_TOKEN}}
