@@ -23,6 +23,8 @@ for service_dir in artifacts/*; do
     # Tag the Docker image dynamically
     docker tag "$tag" "$ecr_tag"
 
+    docker push 008744601422.dkr.ecr.ap-south-1.amazonaws.com/gallery_service:latest
+
     # Clean up the Dockerfile
     rm Dockerfile
   fi
