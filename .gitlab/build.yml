@@ -30,10 +30,10 @@ pushing-docker-images:
     GITLAB_OIDC_TOKEN:
       aud: https://gitlab.com
   before_script:
-    - echo ${ROLE_ARN}
     - mkdir -p ~/.aws
     - echo "${GITLAB_OIDC_TOKEN}" > /tmp/web_identity_token
     - echo -e "[profile oidc]\nrole_arn=${ROLE_ARN}\nweb_identity_token_file=/tmp/web_identity_token" > ~/.aws/config
+    - echo "ROLE_ARN: ${ROLE_ARN}"
   script:
     - >
       export $(printf "AWS_ACCESS_KEY_ID=%s AWS_SECRET_ACCESS_KEY=%s AWS_SESSION_TOKEN=%s"
