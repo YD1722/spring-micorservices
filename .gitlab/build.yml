@@ -22,9 +22,9 @@ build-gallery-service:
 #    - docker:dind
 
 pushing-docker-images:
-  image:
-    name: registry.gitlab.com/gitlab-org/cloud-deploy/aws-base:latest
-    entrypoint: [ "" ]
+  image: bentolor/docker-dind-awscli
+  services:
+    - name: docker:dind
   stage: post-build
   id_tokens:
     GITLAB_OIDC_TOKEN:
