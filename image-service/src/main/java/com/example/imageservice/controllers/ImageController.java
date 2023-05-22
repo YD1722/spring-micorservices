@@ -15,7 +15,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @RestController
-@RequestMapping("/images")
+    @RequestMapping("/images")
 public class ImageController {
     @Autowired
     private Environment env;
