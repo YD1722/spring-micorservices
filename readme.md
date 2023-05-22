@@ -4,7 +4,7 @@
 
 Wierd Arts is not just an ordinary app - 
 it's my personal playground where my dev skills and ops skills collide. 
-Here, I am exploring and applying all the cool stuff I'm learning in my journey.
+Here, I am exploring and applying all the cool stuff I'm learning in my journey to Ops.
 
 ## DevOps Journey so far
 

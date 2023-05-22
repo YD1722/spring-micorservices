@@ -3,15 +3,59 @@ build-gallery-service:
   variables:
     SERVICE_NAME: gallery-service
 
-build-image-service:
-  extends: .maven-build
-  variables:
-    SERVICE_NAME: image-service
+#build-image-service:
+#  extends: .maven-build
+#  variables:
+#    SERVICE_NAME: image-service
+#
+#build-image-processing-service:
+#  extends: .maven-build
+#  variables:
+#    SERVICE_NAME: image-processing-service
 
-build-image-processing-service:
-  extends: .maven-build
-  variables:
-    SERVICE_NAME: image-processing-service
+#preparing-docker-images:
+#  image: docker:dind
+#  stage: post-build
+#  script:
+#    - sh .gitlab/scripts/docker.sh
+#  services:
+#    - docker:dind
+
+variables:
+  DOCKER_REGISTRY: 008744601422.dkr.ecr.us-east-1.amazonaws.com
+  AWS_DEFAULT_REGION: ap-south-1
+  DOCKER_HOST: tcp://docker:2375
+
+pushing-docker-images:
+  image:
+    name: amazon/aws-cli
+    entrypoint: [ "" ]
+  services:
+    - docker:dind
+  stage: post-build
+  id_tokens:
+    GITLAB_OIDC_TOKEN:
+      aud: https://gitlab.com
+  before_script:
+    - amazon-linux-extras install docker
+    - aws --version
+    - docker --version
+    - mkdir -p ~/.aws
+    - echo "${GITLAB_OIDC_TOKEN}" > /tmp/web_identity_token
+    - echo -e "[profile oidc]\nrole_arn=${ROLE_ARN}\nweb_identity_token_file=/tmp/web_identity_token" > ~/.aws/config
+  script:
+    - >
+      export $(printf "AWS_ACCESS_KEY_ID=%s AWS_SECRET_ACCESS_KEY=%s AWS_SESSION_TOKEN=%s"
+      $(aws sts assume-role-with-web-identity
+      --role-arn ${ROLE_ARN}
+      --role-session-name "GitLabRunner-${CI_PROJECT_ID}-${CI_PIPELINE_ID}"
+      --web-identity-token ${GITLAB_OIDC_TOKEN}
+      --duration-seconds 3600
+      --query 'Credentials.[AccessKeyId,SecretAccessKey,SessionToken]'
+      --output text))
+    - aws sts get-caller-identity
+    - aws ecr get-login-password | docker login --username AWS --password-stdin $DOCKER_REGISTRY
+    - sh .gitlab/scripts/docker.sh
 
 .maven-build:
   extends:
@@ -24,11 +68,10 @@ build-image-processing-service:
   stage: build
   script:
     - bash .gitlab/scripts/maven.sh $SERVICE_NAME $MVN_GOALS
-    - mkdir -p artifacts
-    - cp $SERVICE_NAME/target/*.jar artifacts/
-    - docker build -t ${SERVICE_NAME}:latest -t 008744601422.dkr.ecr.ap-south-1.amazonaws.com/${SERVICE_NAME}:latest -f Dockerfile artifacts/
+    - mkdir -p artifacts/$SERVICE_NAME
+    - cp $SERVICE_NAME/target/*.jar artifacts/$SERVICE_NAME/
   artifacts:
     when: on_success
-    expire_in: 1 hrs
+    expire_in: 10 min
     paths:
       - artifacts/
