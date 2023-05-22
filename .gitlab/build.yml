@@ -21,6 +21,11 @@ build-gallery-service:
 #  services:
 #    - docker:dind
 
+variables:
+  DOCKER_REGISTRY: 008744601422.dkr.ecr.us-east-1.amazonaws.com
+  AWS_DEFAULT_REGION: ap-south-1
+  DOCKER_HOST: tcp://docker:2375
+
 pushing-docker-images:
   image:
     name: amazon/aws-cli
@@ -49,7 +54,7 @@ pushing-docker-images:
       --query 'Credentials.[AccessKeyId,SecretAccessKey,SessionToken]'
       --output text))
     - aws sts get-caller-identity
-    - aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 008744601422.dkr.ecr.ap-south-1.amazonaws.com
+    - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $DOCKER_REGISTRY
     - sh .gitlab/scripts/docker.sh
 
 .maven-build:
