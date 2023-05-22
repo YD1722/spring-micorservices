@@ -1,13 +1,13 @@
 on:
   push:
 
-  workflow_dispatch:
-    inputs:
-      sync-enabled:
-        description: 'Flag to enable/disable GitlabSync'
-        required: true
-        default: 'true'
-        # Add any additional input parameters if needed
+#  workflow_dispatch:
+#    inputs:
+#      sync-enabled:
+#        description: 'Flag to enable/disable GitlabSync'
+#        required: true
+#        default: 'true'
+#        # Add any additional input parameters if needed
 
 
 jobs:
@@ -20,7 +20,7 @@ jobs:
           fetch-depth: 0
       - name: Gitlab Sync Action
         id: gitlab-sync
-        if: ${{ github.event.inputs.sync-enabled == 'true' }}
+#        if: ${{ github.event.inputs.sync-enabled == 'true' }}
         uses: wangchucheng/git-repo-sync@v0.1.0
         with:
           target-url: https://gitlab.com/yashotech/spring-micorservices.git
