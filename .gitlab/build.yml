@@ -22,14 +22,19 @@ build-gallery-service:
 #    - docker:dind
 
 pushing-docker-images:
-  image: bentolor/docker-dind-awscli
+  image:
+    name: amazon/aws-cli
+    entrypoint: [ "" ]
   services:
-    - name: docker:dind
+    - docker:dind
   stage: post-build
   id_tokens:
     GITLAB_OIDC_TOKEN:
       aud: https://gitlab.com
   before_script:
+    - amazon-linux-extras install docker
+    - aws --version
+    - docker --version
     - mkdir -p ~/.aws
     - echo "${GITLAB_OIDC_TOKEN}" > /tmp/web_identity_token
     - echo -e "[profile oidc]\nrole_arn=${ROLE_ARN}\nweb_identity_token_file=/tmp/web_identity_token" > ~/.aws/config
