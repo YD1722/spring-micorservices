@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 9080
 
 eureka:
   client:
@@ -9,6 +9,11 @@ eureka:
 spring:
   application:
     name: gateway-service
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8082/realms/dev_yashodha_space
   cloud:
     gateway:
       discovery:
