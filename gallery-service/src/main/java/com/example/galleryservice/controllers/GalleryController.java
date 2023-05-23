@@ -1,5 +1,6 @@
 package com.example.galleryservice.controllers;
 
+import com.example.galleryservice.exceptions.GalleryServiceException;
 import com.example.galleryservice.models.Gallery;
 import com.example.galleryservice.services.GalleryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,16 +51,16 @@ public class GalleryController {
         }
     }
 
+    // TODO: Why make this variable final
     @GetMapping("/{id}")
-    public Gallery getGallery(@PathVariable final int id) {
-        Gallery gallery = new Gallery();
-        gallery.setId(1);
-
-        // TODO: Check ways of calling other services
-        String images = galleryService.getImages();
-        gallery.setImages(images);
-
-        return gallery;
+    public Gallery getGallery(@PathVariable final long id) {
+        try {
+            return galleryService.getGalleryById(id);
+        } catch (GalleryServiceException e) {
+            // TODO: Only checking the behavior of swagger doc here. update this
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST, "Error creating new gallery", e);
+        }
     }
 
     @GetMapping("/ping")
