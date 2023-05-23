@@ -16,7 +16,7 @@ function spin_up_ms() {
   docker compose -f compose.ms.yaml up -d
 }
 
-set_profile
+#set_profile
 spin_up_supporting_infra
-build_ms
-spin_up_ms
+#build_ms
+#spin_up_ms

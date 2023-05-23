@@ -1,7 +1,16 @@
 server:
   port: 8400
 
-rabbit:
-  exchange: processor
-  queueName: image-processor
-  bindingKey: spring-bk
+spring:
+  cloud:
+    discovery:
+      enabled: false
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+app:
+  queue:
+    name: image-processor
