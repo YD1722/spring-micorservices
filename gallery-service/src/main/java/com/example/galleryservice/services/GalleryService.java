@@ -3,6 +3,7 @@ package com.example.galleryservice.services;
 import com.example.galleryservice.config.AppConfig;
 import com.example.galleryservice.models.Gallery;
 import com.example.galleryservice.respository.GalleryRepository;
+import org.apache.commons.lang.NotImplementedException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,10 @@ public class GalleryService {
 
     public void createGallery(Gallery gallery) {
         galleryRepository.save(gallery);
+    }
+
+    public void updateGallery(Gallery gallery) {
+        throw new NotImplementedException();
     }
 
     public String getImages() {
