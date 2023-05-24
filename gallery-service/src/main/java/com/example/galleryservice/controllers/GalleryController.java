@@ -1,5 +1,6 @@
 package com.example.galleryservice.controllers;
 
+import com.example.galleryservice.aspect.Audit;
 import com.example.galleryservice.exceptions.GalleryServiceException;
 import com.example.galleryservice.models.Gallery;
 import com.example.galleryservice.services.GalleryService;
@@ -39,6 +40,7 @@ public class GalleryController {
 
     // -------- Admin Area --------
     // This method should only be accessed by users with role of 'admin'
+    @Audit("gallery_update")
     @PutMapping
     public ResponseEntity updateGallery(@RequestBody Gallery gallery) {
         try {

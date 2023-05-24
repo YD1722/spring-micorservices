@@ -32,7 +32,7 @@ public class GalleryService {
     }
 
     public void updateGallery(Gallery gallery) {
-        throw new NotImplementedException();
+//        throw new NotImplementedException();
     }
 
     public Gallery getGalleryById(long id) throws GalleryServiceException {
@@ -55,6 +55,5 @@ public class GalleryService {
         } catch (Exception e) {
             throw new GalleryServiceException(e);
         }
-
     }
 }

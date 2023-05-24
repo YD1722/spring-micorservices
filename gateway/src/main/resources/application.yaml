@@ -28,3 +28,5 @@ spring:
           uri: lb://GALLERY-SERVICE
           predicates:
             - Path=/gallery/**
+
+# TODO: service discovery SPOF ?
