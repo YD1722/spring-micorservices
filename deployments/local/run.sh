@@ -4,7 +4,10 @@ function set_profile() {
 }
 
 function spin_up_supporting_infra() {
+  docker network create wierd_arts_network
+
   docker compose up -d
+  docker compose -f compose.kc.yaml up -d
 }
 
 function build_ms() {

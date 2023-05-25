@@ -7,7 +7,7 @@ services:
     ports:
       - 8761:8761
     networks:
-      - wierd_arts_proxy
+      - internal
 
   gateway:
     container_name: gateway
@@ -19,7 +19,7 @@ services:
     ports:
       - 8080:8080
     networks:
-      - wierd_arts_proxy
+      - internal
     depends_on:
       - service-registry
 
@@ -37,7 +37,7 @@ services:
     ports:
       - 8100:8100
     networks:
-      - wierd_arts_proxy
+      - internal
     depends_on:
       - service-registry
 
@@ -51,7 +51,7 @@ services:
     ports:
       - 8200:8200
     networks:
-      - wierd_arts_proxy
+      - internal
     depends_on:
       - service-registry
 
@@ -63,11 +63,11 @@ services:
     ports:
       - 8400:8400
     networks:
-      - wierd_arts_proxy
+      - internal
     depends_on:
       - service-registry
 
 networks:
-  wierd_arts_proxy:
-    external:
-      name: wierd_arts_network
+  internal:
+    name: wierd_arts_network
+    external: true

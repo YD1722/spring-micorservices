@@ -8,7 +8,7 @@ services:
       - "5672:5672"
       - "15672:15672"
     networks:
-      - wierd_arts
+      - internal
 
   datasource:
     image: postgres:15.2-alpine
@@ -23,7 +23,7 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
     networks:
-      - wierd_arts
+      - internal
 
   pgadmin:
     image: dpage/pgadmin4
@@ -37,12 +37,13 @@ services:
     volumes:
       - pgadmindata:/var/lib/pgadmin
     networks:
-      - wierd_arts
+      - internal
 
 volumes:
   pgdata:
   pgadmindata:
 
 networks:
-  wierd_arts:
+  internal:
     name: wierd_arts_network
+    external: true

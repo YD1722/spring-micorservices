@@ -29,7 +29,7 @@ public class AuditAspect {
         StringBuilder sb = new StringBuilder();
 
         sb.append("AUDIT-TRAIL: " + auditMessage);
-        sb.append("Returned Object: {");
+        sb.append("OUT: {");
 
         for (Field field : objectClass.getDeclaredFields()) {
             field.setAccessible(true);
@@ -54,11 +54,6 @@ public class AuditAspect {
         Audit aspectLogger = method.getAnnotation(Audit.class);
 
         return aspectLogger.value();
-    }
-
-    private static String getFieldValue(Field field) {
-        String fieldValue = field.getAnnotation(Audit.class).value();
-        return fieldValue.isEmpty() ? field.getName() : fieldValue;
     }
 
     private static boolean isMasked(Field field) {

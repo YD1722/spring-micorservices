@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.oauth2.server.resource.authentication.BearerTokenAuthentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -25,10 +27,8 @@ public class GalleryController {
         this.galleryService = galleryService;
     }
 
-    // -------- Admin Area --------
-    // This method should only be accessed by users with role of 'admin'
     @PostMapping
-    public ResponseEntity<String> createGallery(@RequestBody Gallery gallery) {
+    public ResponseEntity<String> createGallery(@RequestBody Gallery gallery, BearerTokenAuthentication auth) {
         try {
             galleryService.createGallery(gallery);
             return ResponseEntity.ok("Gallery created successfully");
