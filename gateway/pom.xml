@@ -65,4 +65,19 @@
         </plugins>
     </build>
 
+    <profiles>
+        <profile>
+            <id>aws</id>
+            <properties>
+                <spring.profiles.active>aws</spring.profiles.active>
+            </properties>
+        </profile>
+        <profile>
+            <id>k8</id>
+            <properties>
+                <spring.profiles.active>k8</spring.profiles.active>
+            </properties>
+        </profile>
+    </profiles>
+
 </project>
