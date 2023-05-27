@@ -5,6 +5,11 @@ stages:
   - post-build
   - deploy
 
+variables:
+  TF_STATE_NAME: default
+  TF_CACHE_KEY: default
+  TF_ROOT: deployments/aws/terraform/wierd_arts
+
 #workflow:
 #  rules:
 #    - if: $CI_COMMIT_BRANCH == "dev" ||
@@ -14,3 +19,4 @@ stages:
 
 include:
   - local: '/.gitlab/build.yml'
+  - template: Terraform.gitlab-ci.yml

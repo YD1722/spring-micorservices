@@ -1,0 +1,8 @@
+# TODO: how to make this config common| avoid hc project name
+#tf-deploy:
+#  script:
+#    - cd deployments/aws/wierd_arts
+#    - terraform init
+#    - terraform validate
+#    - terraform plan
+#    - terraform apply
