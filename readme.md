@@ -1,12 +1,17 @@
-# Wierd Arts - Unleashing Dev and Ops Powers
+# Wierd Arts - Unleash Your Creative Powers
+
 
 ## Description
 
 Wierd Arts is not just an ordinary app - 
 it's my personal playground where my dev skills and ops skills collide. 
-Here, I am exploring and applying all the cool stuff I'm learning in my journey to Ops.
+
 
 ## DevOps Journey so far
+Here, I am exploring and applying all the cool stuff I'm learning in my journey to Ops.
+
+## Features
+
 
 - **K8 Deployments**: Wierd Arts empowers you to effortlessly deploy your applications on Kubernetes clusters. Whether you're a beginner or an experienced user, this app will enhance your understanding of Kubernetes and provide a seamless deployment experience.
 
@@ -24,5 +29,9 @@ Wierd Arts is an independent project and is not affiliated with Kubernetes, Amaz
 
 Enjoy exploring the limitless possibilities of art, technology, and creativity with Wierd Arts!
 
+
 ## Tooling ref
 - list mvn phases with goals -> http://buildplan.jcgay.fr/usage.html
+
+
+
