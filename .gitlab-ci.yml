@@ -1,14 +1,14 @@
+variables:
+  TF_STATE_NAME: default
+  TF_CACHE_KEY: default
+  TF_ROOT: deployments/aws/terraform/wierd_arts
+
 stages:
   - pre-build
   - build
   - test
   - post-build
   - deploy
-
-variables:
-  TF_STATE_NAME: default
-  TF_CACHE_KEY: default
-  TF_ROOT: deployments/aws/terraform/wierd_arts
 
 #workflow:
 #  rules:
