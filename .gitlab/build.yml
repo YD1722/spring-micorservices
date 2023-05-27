@@ -26,7 +26,7 @@ variables:
 
 pushing-docker-images:
   image:
-    name: amazon/aws-cli
+    name: amazon/aws-cli:latest
     entrypoint: [ "" ]
   services:
     - docker:dind
