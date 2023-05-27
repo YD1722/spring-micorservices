@@ -1,25 +1,22 @@
+build_gateway:
+  extends: .maven-build
+  variables:
+    SERVICE_NAME: gateway
+
 build-gallery-service:
   extends: .maven-build
   variables:
     SERVICE_NAME: gallery-service
 
-#build-image-service:
-#  extends: .maven-build
-#  variables:
-#    SERVICE_NAME: image-service
-#
+build-image-service:
+  extends: .maven-build
+  variables:
+    SERVICE_NAME: image-service
+
 #build-image-processing-service:
 #  extends: .maven-build
 #  variables:
 #    SERVICE_NAME: image-processing-service
-
-#preparing-docker-images:
-#  image: docker:dind
-#  stage: post-build
-#  script:
-#    - sh .gitlab/scripts/docker.sh
-#  services:
-#    - docker:dind
 
 variables:
   DOCKER_HOST: tcp://docker:2375
