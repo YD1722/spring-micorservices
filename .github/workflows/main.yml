@@ -3,13 +3,13 @@ name: GitlabSync
 on:
   push:
 
-#  workflow_dispatch:
-#    inputs:
-#      sync-enabled:
-#        description: 'Flag to enable/disable GitlabSync'
-#        required: true
-#        default: 'true'
-#        # Add any additional input parameters if needed
+  workflow_dispatch:
+    inputs:
+      sync-enabled:
+        description: 'Flag to enable/disable GitlabSync'
+        required: true
+        default: 'true'
+        # Add any additional input parameters if needed
 
 
 jobs:
