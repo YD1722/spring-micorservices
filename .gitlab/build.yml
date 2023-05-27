@@ -52,7 +52,7 @@ pushing-docker-images:
       --query 'Credentials.[AccessKeyId,SecretAccessKey,SessionToken]'
       --output text))
     - aws sts get-caller-identity
-    - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --profile oidc --password-stdin $DOCKER_REGISTRY
+    - aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 008744601422.dkr.ecr.ap-south-1.amazonaws.com
     - sh .gitlab/scripts/docker.sh
 
 .maven-build:
