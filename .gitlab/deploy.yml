@@ -1,8 +1,24 @@
-# TODO: how to make this config common| avoid hc project name
-#tf-deploy:
-#  script:
-#    - cd deployments/aws/wierd_arts
-#    - terraform init
-#    - terraform validate
-#    - terraform plan
-#    - terraform apply
+default:
+  image:
+    name: hashicorp/terraform:latest
+    entrypoint:
+      - /usr/bin/env
+      - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+  before_script:
+    - terraform init
+  cache:
+    key: terraform
+    paths:
+      - .terraform
+
+tf-validate:
+  stage: tf-review
+  script:
+    - terraform validate
+
+tf-deploy:
+  stage: tf-deploy
+  script:
+    - terraform plan --out plan
+    - terraform apply --auto-approve plan
+

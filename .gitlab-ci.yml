@@ -8,7 +8,8 @@ stages:
   - build
   - test
   - post-build
-  - deploy
+  - tf-review
+  - tf-deploy
 
 #workflow:
 #  rules:
@@ -19,4 +20,5 @@ stages:
 
 include:
   - local: '/.gitlab/build.yml'
-  - template: Terraform.gitlab-ci.yml
+  - local: '/.gitlab/deploy.yml'
+#  - template: Terraform.gitlab-ci.yml
