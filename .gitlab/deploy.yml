@@ -2,21 +2,19 @@ tf-review:
   stage: tf-review
   extends: .run-terraform
   script:
+    - cd deployments/aws/wierd_arts
     - terraform init
     - terraform validate
 
-tf-deploy:
-  stage: tf-deploy
-  extends: .run-terraform
-  script:
-    - terraform plan --out plan
-    - terraform apply --auto-approve plan
+#tf-deploy:
+#  stage: tf-deploy
+#  extends: .run-terraform
+#  script:
+#    - terraform plan --out plan
+#    - terraform apply --auto-approve plan
 
 
 .run-terraform:
-  script:
-    - pwd
-    - cd deployments/aws/wierd_arts
   image:
     name: hashicorp/terraform:latest
     entrypoint:
