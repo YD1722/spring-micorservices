@@ -1,27 +1,24 @@
-default:
+tf-review:
+  stage: tf-review
+  extends: .run-terraform
+  script:
+    - terraform init
+    - terraform validate
+
+tf-deploy:
+  stage: tf-deploy
+  extends: .run-terraform
+  script:
+    - terraform plan --out plan
+    - terraform apply --auto-approve plan
+
+
+.run-terraform:
   image:
     name: hashicorp/terraform:latest
     entrypoint:
       - /usr/bin/env
       - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
-  before_script:
-    - pwd
-    - terraform init
-  cache:
-    key: terraform
-    paths:
-      - .terraform
-
-tf-validate:
-  stage: tf-review
-  script:
-    - pwd
-    - terraform validate
-
-tf-deploy:
-  stage: tf-deploy
-  script:
-    - pwd
-    - terraform plan --out plan
-    - terraform apply --auto-approve plan
-
+    before_script:
+      - pwd
+      - cd deployments/aws/wierd_arts
