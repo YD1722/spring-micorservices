@@ -5,6 +5,7 @@ default:
       - /usr/bin/env
       - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
   before_script:
+    - pwd
     - terraform init
   cache:
     key: terraform
@@ -14,11 +15,13 @@ default:
 tf-validate:
   stage: tf-review
   script:
+    - pwd
     - terraform validate
 
 tf-deploy:
   stage: tf-deploy
   script:
+    - pwd
     - terraform plan --out plan
     - terraform apply --auto-approve plan
 
