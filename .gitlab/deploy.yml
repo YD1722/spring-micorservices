@@ -19,6 +19,6 @@ tf-deploy:
     entrypoint:
       - /usr/bin/env
       - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
-    before_script:
+    script:
       - pwd
       - cd deployments/aws/wierd_arts
