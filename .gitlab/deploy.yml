@@ -2,7 +2,7 @@ tf-review:
   stage: tf-review
   extends: .run-terraform
   script:
-    - cd deployments/aws/wierd_arts
+    - cd deployments/aws/terraform/wierd_arts
     - terraform init
     - terraform validate
 
