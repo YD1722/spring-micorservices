@@ -9,6 +9,7 @@ stages:
   - test
   - post-build
   - deploy
+  - destroy
 
 #workflow:
 #  rules:
@@ -18,5 +19,5 @@ stages:
 #        $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "master"))
 
 include:
-#  - local: '/.gitlab/build.yml'
+  - local: '/.gitlab/build.yml'
   - local: '/.gitlab/deploy.yml'
