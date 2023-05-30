@@ -17,4 +17,18 @@ spec:
       containers:
         - name: gallery-service
           imagePullPolicy: Never
-          image: yd/gallery-service:latest
+          image: k8/gallery-service:latest
+          env:
+            - name: ENABLE_EUREKA
+              value: 'false'
+            - name: DATASOURCE_URL
+              value: jdbc:h2:mem:testdb
+            - name: DATASOURCE_USER
+              value: sa
+            - name: DATASOURCE_PASS
+              value: password
+            - name: DATASOURCE_DRIVER
+              value: org.h2.Driver
+            - name: DIALECT
+              value: org.hibernate.dialect.H2Dialect
+

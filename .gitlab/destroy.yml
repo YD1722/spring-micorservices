@@ -1,0 +1,32 @@
+destroy:
+  stage: destroy
+  extends: .login_to_aws
+  script:
+    - cd deployments/aws/terraform/wierd_arts
+    - terraform init
+    - terraform destroy -auto-approve
+  when: manual
+
+.login_to_aws:
+  image:
+    name: zenika/terraform-aws-cli
+    entrypoint: [ "" ]
+  id_tokens:
+    GITLAB_OIDC_TOKEN:
+      aud: https://gitlab.com
+  before_script:
+    - aws --version
+    - terraform --version
+    - mkdir -p ~/.aws
+    - echo "${GITLAB_OIDC_TOKEN}" > /tmp/web_identity_token
+    - echo -e "[profile oidc]\nrole_arn=${ROLE_ARN}\nweb_identity_token_file=/tmp/web_identity_token" > ~/.aws/config
+    - >
+      export $(printf "AWS_ACCESS_KEY_ID=%s AWS_SECRET_ACCESS_KEY=%s AWS_SESSION_TOKEN=%s"
+      $(aws sts assume-role-with-web-identity
+      --role-arn ${ROLE_ARN}
+      --role-session-name "GitLabRunner-${CI_PROJECT_ID}-${CI_PIPELINE_ID}"
+      --web-identity-token ${GITLAB_OIDC_TOKEN}
+      --duration-seconds 3600
+      --query 'Credentials.[AccessKeyId,SecretAccessKey,SessionToken]'
+      --output text))
+    - aws sts get-caller-identity

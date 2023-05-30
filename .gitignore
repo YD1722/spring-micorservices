@@ -1,2 +1,13 @@
+#idea
 .idea
+*.iml
+#terraform
 .terraform
+.terraform.lock.hcl
+.terraform.tfstate.lock.info
+*.tfstate
+*.tfstate.backup
+terraform/scenarios/*/builds/**
+terraform_output_*.json
+#targets
+*/target/**

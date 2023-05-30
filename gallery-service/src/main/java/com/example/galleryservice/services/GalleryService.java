@@ -1,8 +1,11 @@
 package com.example.galleryservice.services;
 
 import com.example.galleryservice.config.AppConfig;
+import com.example.galleryservice.exceptions.GalleryServiceException;
+import com.example.galleryservice.helpers.HttpRequestHelper;
 import com.example.galleryservice.models.Gallery;
 import com.example.galleryservice.respository.GalleryRepository;
+import org.apache.commons.lang.NotImplementedException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,24 +31,29 @@ public class GalleryService {
         galleryRepository.save(gallery);
     }
 
-    public String getImages() {
+    public void updateGallery(Gallery gallery) {
+//        throw new NotImplementedException();
+    }
+
+    public Gallery getGalleryById(long id) throws GalleryServiceException {
+        Gallery gallery = new Gallery();
+        gallery.setId(1);
+
+        String images = this.getImages();
+        gallery.setImages(images);
+
+        return gallery;
+    }
+
+    protected String getImages() throws GalleryServiceException {
         try {
+            // TODO: Check ways of calling other services ? may be camel (too heavy for a simple use case like this ?)
             String externalUrl = appConfig.getExternalServiceImageServiceUrl() + "/images";
-            logger.info("EXTERNAL_URL : " + externalUrl);
+            logger.info("Getting images from     : " + externalUrl);
 
-            // TODO: How to change type of the http response
-            HttpRequest httpRequest = HttpRequest.newBuilder().uri(new URI(externalUrl)).GET().build();
-            HttpResponse<String> response = HttpClient.newHttpClient().send(httpRequest, HttpResponse.BodyHandlers.ofString());
-
-            return response.body();
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
+            return HttpRequestHelper.get(externalUrl);
+        } catch (Exception e) {
+            throw new GalleryServiceException(e);
         }
-
-        return "";
     }
 }
