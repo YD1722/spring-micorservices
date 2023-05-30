@@ -20,7 +20,56 @@ module "ecs_cluster" {
   tags = local.tags
 }
 
-#Change cloudwatch log configs
+module "ecs_service_gateway" {
+  source = "terraform-aws-modules/ecs/aws//modules/service"
+
+  name        = local.services.gateway.name
+  cluster_arn = module.ecs_cluster.arn
+
+  cpu    = 256
+  memory = 512
+
+  create_security_group = false
+
+  container_definitions = {
+    (local.services.gallery_service.name) = {
+      #https://github.com/spring-projects/spring-boot/issues/8578
+      readonly_root_filesystem = false
+
+      cpu           = 256
+      memory        = 512
+      essential     = true
+      image         = "008744601422.dkr.ecr.ap-south-1.amazonaws.com/gateway:latest"
+      port_mappings = [
+        {
+          name          = local.services.gateway.name
+          containerPort = local.services.gateway.port
+          hostPort      = local.services.gateway.port
+        }
+      ]
+      "environment" : [
+        {
+          "name" : "SPRING_PROFILES_ACTIVE",
+          "value" : "aws"
+        }
+      ],
+    }
+  }
+
+  load_balancer = {
+    service = {
+      target_group_arn = element(module.alb.target_group_arns, 0)
+      container_name   = local.services.gateway.name
+      container_port   = local.services.gateway.port
+    }
+  }
+
+  subnet_ids         = module.vpc.private_subnets
+  security_group_ids = [aws_security_group.allow_all.id]
+
+  tags = local.tags
+}
+
 module "ecs_service_gallery_service" {
   source = "terraform-aws-modules/ecs/aws//modules/service"
 
@@ -40,7 +89,7 @@ module "ecs_service_gallery_service" {
       cpu           = 256
       memory        = 512
       essential     = true
-      image         = "008744601422.dkr.ecr.ap-south-1.amazonaws.com/gallery_service:latest"
+      image         = "008744601422.dkr.ecr.ap-south-1.amazonaws.com/gallery-service:latest"
       port_mappings = [
         {
           name          = local.services.gallery_service.name
@@ -71,14 +120,6 @@ module "ecs_service_gallery_service" {
     }
   }
 
-  load_balancer = {
-    service = {
-      target_group_arn = element(module.alb.target_group_arns, 0)
-      container_name   = local.services.gallery_service.name
-      container_port   = local.services.gallery_service.port
-    }
-  }
-
   subnet_ids         = module.vpc.private_subnets
   security_group_ids = [aws_security_group.allow_all.id]
 
@@ -104,7 +145,7 @@ module "ecs_service_image_service" {
       cpu           = 256
       memory        = 512
       essential     = true
-      image         = "008744601422.dkr.ecr.ap-south-1.amazonaws.com/image_service:latest"
+      image         = "008744601422.dkr.ecr.ap-south-1.amazonaws.com/image-service:latest"
       port_mappings = [
         {
           name          = local.services.image_service.name

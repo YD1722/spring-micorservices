@@ -126,8 +126,7 @@
             </plugin>
         </plugins>
     </build>
-
-
+    
     <profiles>
         <profile>
             <id>aws</id>

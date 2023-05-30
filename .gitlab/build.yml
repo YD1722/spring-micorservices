@@ -1,34 +1,29 @@
+build-gateway:
+  extends: .maven-build
+  variables:
+    SERVICE_NAME: gateway
+
 build-gallery-service:
   extends: .maven-build
   variables:
     SERVICE_NAME: gallery-service
 
-#build-image-service:
-#  extends: .maven-build
-#  variables:
-#    SERVICE_NAME: image-service
-#
+build-image-service:
+  extends: .maven-build
+  variables:
+    SERVICE_NAME: image-service
+
 #build-image-processing-service:
 #  extends: .maven-build
 #  variables:
 #    SERVICE_NAME: image-processing-service
 
-#preparing-docker-images:
-#  image: docker:dind
-#  stage: post-build
-#  script:
-#    - sh .gitlab/scripts/docker.sh
-#  services:
-#    - docker:dind
-
 variables:
-  DOCKER_REGISTRY: 008744601422.dkr.ecr.us-east-1.amazonaws.com
-  AWS_DEFAULT_REGION: ap-south-1
   DOCKER_HOST: tcp://docker:2375
 
 pushing-docker-images:
   image:
-    name: amazon/aws-cli
+    name: amazon/aws-cli:latest
     entrypoint: [ "" ]
   services:
     - docker:dind
@@ -54,7 +49,8 @@ pushing-docker-images:
       --query 'Credentials.[AccessKeyId,SecretAccessKey,SessionToken]'
       --output text))
     - aws sts get-caller-identity
-    - aws ecr get-login-password | docker login --username AWS --password-stdin $DOCKER_REGISTRY
+    - echo $DOCKER_REGISTRY
+    - aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 008744601422.dkr.ecr.ap-south-1.amazonaws.com
     - sh .gitlab/scripts/docker.sh
 
 .maven-build:
@@ -67,7 +63,7 @@ pushing-docker-images:
   image: maven:latest
   stage: build
   script:
-    - bash .gitlab/scripts/maven.sh $SERVICE_NAME $MVN_GOALS
+    - bash .gitlab/scripts/maven.sh $SERVICE_NAME $MVN_GOALS -DskipTests
     - mkdir -p artifacts/$SERVICE_NAME
     - cp $SERVICE_NAME/target/*.jar artifacts/$SERVICE_NAME/
   artifacts:

@@ -17,7 +17,6 @@ for service_dir in artifacts/*; do
       .
 
     docker tag "$tag" "$ecr_tag"
-    docker images
     docker push "$ecr_tag"
 
     # Clean up the Dockerfile
