@@ -1,5 +1,5 @@
 tf-deploy:
-  stage: tf-deploy
+  stage: deploy
   extends: .run-terraform
   script:
     - cd deployments/aws/terraform/wierd_arts
@@ -10,7 +10,7 @@ tf-deploy:
 
 .run-terraform:
   image:
-    name: amazon/aws-cli:latest
+    name: zenika/terraform-aws-cli
     entrypoint: [ "" ]
   id_tokens:
     GITLAB_OIDC_TOKEN:
