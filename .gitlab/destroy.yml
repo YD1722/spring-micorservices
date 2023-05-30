@@ -4,7 +4,7 @@ destroy:
   script:
     - cd deployments/aws/terraform/wierd_arts
     - terraform init
-    - terraform destroy
+    - terraform destroy -auto-approve
   when: manual
 
 .login_to_aws:
