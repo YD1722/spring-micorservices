@@ -3,6 +3,7 @@ destroy:
   extends: .login_to_aws
   script:
     - cd deployments/aws/terraform/wierd_arts
+    - terraform init
     - terraform destroy
   when: manual
 
