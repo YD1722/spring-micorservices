@@ -16,7 +16,6 @@ tf-deploy:
     GITLAB_OIDC_TOKEN:
       aud: https://gitlab.com
   before_script:
-    - amazon-linux-extras install terraform
     - aws --version
     - terraform --version
     - mkdir -p ~/.aws
