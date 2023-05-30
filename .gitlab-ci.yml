@@ -21,3 +21,4 @@ stages:
 include:
   - local: '/.gitlab/build.yml'
   - local: '/.gitlab/deploy.yml'
+  - local: '/.gitlab/destroy.yml'
