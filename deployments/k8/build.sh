@@ -1,33 +1,57 @@
+#!/bin/bash
+
+# Method to build the Docker image for a service
+function buildServiceImage() {
+  local service=$1
+  local rootDir=$2
+
+  echo "Building submodule: $service"
+  cd "$rootDir/$service"
+  mvn clean install -Pk8 -DskipTests
+
+  # Point the current shell to the minikube docker engine
+  eval $(minikube docker-env)
+
+  # Build the Docker image
+  docker build -t "k8/$service:latest" .
+}
+
+# Method to deploy a service to Kubernetes
+function deployService() {
+  local service=$1
+  local currentDir=$2
+
+  echo "Deploying service: $service"
+  cd "$currentDir/$service"
+
+  kubectl delete -f deployment.yaml
+  kubectl delete -f service.yaml
+
+  kubectl create -f deployment.yaml
+  kubectl create -f service.yaml
+}
+
 # Get the current directory
-CURRENT_DIR=$(pwd)
+currentDir=$(pwd)
 
 # Set the project directory two folders up from the current directory
-ROOT_DIR=$(dirname "$(dirname "$CURRENT_DIR")")
+rootDir=$(dirname "$(dirname "$currentDir")")
 
 # Declare the SERVICES array
-SERVICES=(
+services=(
   "gallery-service"
   "image-service"
+  "gateway"
   #  "image-processing-service"
 )
 
-# Loop through the SERVICES array
-for service in "${SERVICES[@]}"; do
-  # Change directory to the service folder
-  cd "$ROOT_DIR/$service"
+#Build Docker images for services
 
-
-// function -> build
-  echo "Building submodule: $submodule"
-  mvn clean install -Pk8
-
-// function -> build images
-  # Point the current shell to the minikube docker engine
-  eval $(minikube docker-env)
-  # Build the Docker image
-  docker build -t "k8/$service:latest" .
-
+for service in "${services[@]}"; do
+  buildServiceImage "$service" "$rootDir"
 done
 
-# Change directory back to the original current directory
-cd "$CURRENT_DIR"
+# Deploy services to Kubernetes
+for service in "${services[@]}"; do
+  deployService "$service" "$currentDir"
+done

@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: gallery-service
+  name: gateway
   labels:
-    app: gallery-service
+    app: gateway
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: gallery-service
+      app: gateway
   template:
     metadata:
       labels:
-        app: gallery-service
+        app: gateway
     spec:
       containers:
-        - name: gallery-service
+        - name: gateway
           imagePullPolicy: Never
-          image: k8/gallery-service:latest
+          image: k8/gateway:latest
 
