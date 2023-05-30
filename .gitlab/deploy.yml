@@ -8,6 +8,7 @@ tf-deploy:
 #    - terraform plan --out plan
 #    - terraform apply --auto-approve plan
 
+#TODO create a custom base image
 .run-terraform:
   image:
     name: zenika/terraform-aws-cli
