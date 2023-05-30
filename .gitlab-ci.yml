@@ -8,8 +8,8 @@ stages:
   - build
   - test
   - post-build
-  - tf-review
-  - tf-deploy
+  - deploy
+  - destroy
 
 #workflow:
 #  rules:
@@ -21,4 +21,4 @@ stages:
 include:
   - local: '/.gitlab/build.yml'
   - local: '/.gitlab/deploy.yml'
-#  - template: Terraform.gitlab-ci.yml
+  - local: '/.gitlab/destroy.yml'

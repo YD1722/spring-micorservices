@@ -1,14 +1,12 @@
-tf-deploy:
-  stage: deploy
+destroy:
+  stage: destroy
   extends: .login_to_aws
   script:
     - cd deployments/aws/terraform/wierd_arts
     - terraform init
-    - terraform validate
-    - terraform plan --out plan
-    - terraform apply --auto-approve plan
+    - terraform destroy -auto-approve
+  when: manual
 
-#TODO create a custom base image
 .login_to_aws:
   image:
     name: zenika/terraform-aws-cli
@@ -32,4 +30,3 @@ tf-deploy:
       --query 'Credentials.[AccessKeyId,SecretAccessKey,SessionToken]'
       --output text))
     - aws sts get-caller-identity
-

@@ -7,7 +7,7 @@ function buildServiceImage() {
 
   echo "Building submodule: $service"
   cd "$rootDir/$service"
-  mvn clean install -Pk8 -DskipTests
+  mvn clean install -DskipTests
 
   # Point the current shell to the minikube docker engine
   eval $(minikube docker-env)
@@ -39,14 +39,13 @@ rootDir=$(dirname "$(dirname "$currentDir")")
 
 # Declare the SERVICES array
 services=(
-  "gallery-service"
-  "image-service"
   "gateway"
+  "gallery-service"
+  #  "image-service"
   #  "image-processing-service"
 )
 
 #Build Docker images for services
-
 for service in "${services[@]}"; do
   buildServiceImage "$service" "$rootDir"
 done

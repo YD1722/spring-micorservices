@@ -18,4 +18,9 @@ spec:
         - name: gateway
           imagePullPolicy: Never
           image: k8/gateway:latest
+          env:
+            - name: ENABLE_EUREKA
+              value: 'false'
+            - name: OAUTH_ISSUER_URI
+              value: https://cognito-idp.ap-south-1.amazonaws.com/ap-south-1_VtTCFeOSo
 

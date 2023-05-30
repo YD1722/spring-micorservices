@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: gallery-service
+  name: gateway
 spec:
   type: LoadBalancer
   selector:
-    app: gallery-service
+    app: gateway
   ports:
-    - port: 8100
-      targetPort: 8100
+    - port: 9080
+      targetPort: 9080

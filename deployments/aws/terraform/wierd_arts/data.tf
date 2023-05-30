@@ -1,7 +1,9 @@
 data "terraform_remote_state" "core" {
-  backend = "local"
+  backend = "s3"
 
   config = {
-    path = "../generics/terraform.tfstate"
+    bucket = "dev.yashodha.space.tf.state"
+    key    = "generics"
+    region = "ap-south-1"
   }
 }
