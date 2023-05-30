@@ -11,12 +11,12 @@ stages:
   - tf-review
   - tf-deploy
 
-#workflow:
-#  rules:
-#    - if: $CI_COMMIT_BRANCH == "dev" ||
-#        ($CI_PIPELINE_SOURCE == 'merge_request_event' &&
-#        ($CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "dev" ||
-#        $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "master"))
+workflow:
+  rules:
+    - if: $CI_COMMIT_BRANCH == "dev" ||
+        ($CI_PIPELINE_SOURCE == 'merge_request_event' &&
+        ($CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "dev" ||
+        $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "master"))
 
 include:
   - local: '/.gitlab/build.yml'
