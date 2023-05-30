@@ -30,4 +30,5 @@ tf-deploy:
       --duration-seconds 3600
       --query 'Credentials.[AccessKeyId,SecretAccessKey,SessionToken]'
       --output text))
-      - aws sts get-caller-identity
+    - aws sts get-caller-identity
+
