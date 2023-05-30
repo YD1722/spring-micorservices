@@ -1,17 +1,17 @@
-build-gateway:
-  extends: .maven-build
-  variables:
-    SERVICE_NAME: gateway
+#build-gateway:
+#  extends: .maven-build
+#  variables:
+#    SERVICE_NAME: gateway
 
 build-gallery-service:
   extends: .maven-build
   variables:
     SERVICE_NAME: gallery-service
 
-build-image-service:
-  extends: .maven-build
-  variables:
-    SERVICE_NAME: image-service
+#build-image-service:
+#  extends: .maven-build
+#  variables:
+#    SERVICE_NAME: image-service
 
 #build-image-processing-service:
 #  extends: .maven-build
@@ -68,6 +68,6 @@ pushing-docker-images:
     - cp $SERVICE_NAME/target/*.jar artifacts/$SERVICE_NAME/
   artifacts:
     when: on_success
-    expire_in: 10 min
+    expire_in: 10 mins
     paths:
       - artifacts/
