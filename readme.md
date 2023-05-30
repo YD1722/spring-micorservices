@@ -1,5 +1,6 @@
 # Wierd Arts - Unleash Your Creative Powers
 
+[![GitLab Pipeline](https://gitlab.com/yashotech/spring-micorservices/badges/dev/pipeline.svg)](https://gitlab.com/yashotech/spring-micorservices/-/pipelines)
 
 ## Description
 
