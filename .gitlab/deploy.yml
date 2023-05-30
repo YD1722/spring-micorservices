@@ -5,8 +5,8 @@ tf-deploy:
     - cd deployments/aws/terraform/wierd_arts
     - terraform init
     - terraform validate
-#    - terraform plan --out plan
-#    - terraform apply --auto-approve plan
+    - terraform plan --out plan
+    - terraform apply --auto-approve plan
 
 #TODO create a custom base image
 .run-terraform:
