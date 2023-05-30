@@ -22,7 +22,7 @@ jobs:
           fetch-depth: 0
       - name: Gitlab Sync Action
         id: gitlab-sync
-#        if: ${{ github.event.inputs.sync-enabled == 'true' }}
+        if: ${{ github.event.inputs.sync-enabled == 'true' }}
         uses: wangchucheng/git-repo-sync@v0.1.0
         with:
           target-url: https://gitlab.com/yashotech/spring-micorservices.git
