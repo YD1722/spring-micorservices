@@ -46,9 +46,11 @@ services=(
 )
 
 #Build Docker images for services
-for service in "${services[@]}"; do
-  buildServiceImage "$service" "$rootDir"
-done
+#for service in "${services[@]}"; do
+#  buildServiceImage "$service" "$rootDir"
+#done
+
+kubectl create namespace wierd-arts
 
 # Deploy services to Kubernetes
 for service in "${services[@]}"; do
