@@ -1,25 +1,25 @@
-#build-gateway:
-#  extends: .maven-build
-#  variables:
-#    SERVICE_NAME: gateway
+variables:
+  DOCKER_HOST: tcp://docker:2375
+
+build-gateway:
+  extends: .maven-build
+  variables:
+    SERVICE_NAME: gateway
 
 build-gallery-service:
   extends: .maven-build
   variables:
     SERVICE_NAME: gallery-service
 
-#build-image-service:
-#  extends: .maven-build
-#  variables:
-#    SERVICE_NAME: image-service
+build-image-service:
+  extends: .maven-build
+  variables:
+    SERVICE_NAME: image-service
 
 #build-image-processing-service:
 #  extends: .maven-build
 #  variables:
 #    SERVICE_NAME: image-processing-service
-
-variables:
-  DOCKER_HOST: tcp://docker:2375
 
 pushing-docker-images:
   image:
