@@ -24,9 +24,9 @@ services:
       - service-registry
 
   gallery-service:
-    container_name: gallery-service
+    container_name: gallery
     build:
-      context: ../../gallery-service
+      context: ../../gallery
       dockerfile: Dockerfile
     environment:
       - eureka.client.serviceUrl.defaultZone=http://service-registry:8761/eureka/

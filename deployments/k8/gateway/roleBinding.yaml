@@ -1,0 +1,13 @@
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: gatewayRoleBinding
+  namespace: wierd-arts
+subjects:
+  - kind: ServiceAccount
+    name: gateway-sa
+    apiGroup: ""
+roleRef:
+  kind: Role
+  name: gatewayRole
+  apiGroup: ""
