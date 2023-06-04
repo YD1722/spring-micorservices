@@ -1,0 +1,3 @@
+endpoint references
+
+https://cognito-idp.ap-south-1.amazonaws.com/ap-south-1_VtTCFeOSo/.well-known/openid-configuration

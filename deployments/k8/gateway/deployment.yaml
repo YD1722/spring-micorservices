@@ -15,6 +15,7 @@ spec:
       labels:
         app: gateway
     spec:
+      serviceAccountName: gateway-sa
       containers:
         - name: gateway
           imagePullPolicy: Never
@@ -22,6 +23,6 @@ spec:
           env:
             - name: ENABLE_EUREKA
               value: 'false'
-            - name: OAUTH_ISSUER_URI
-              value: https://cognito-idp.ap-south-1.amazonaws.com/ap-south-1_VtTCFeOSo
+#            - name: OAUTH_ISSUER_URI
+#              value: https://cognito-idp.ap-south-1.amazonaws.com/ap-south-1_VtTCFeOSo
 

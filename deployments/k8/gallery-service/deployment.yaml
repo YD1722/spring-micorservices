@@ -15,6 +15,7 @@ spec:
       labels:
         app: gallery-service
     spec:
+      serviceAccountName: gallery-sa
       containers:
         - name: gallery-service
           imagePullPolicy: Never

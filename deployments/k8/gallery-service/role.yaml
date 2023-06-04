@@ -1,0 +1,9 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: wierd-arts
+  name: galleryRole
+rules:
+  - apiGroups: [ "" ] # "" indicates the core API group
+    resources: [ "configmaps", "pods", "services", "endpoints", "secrets", "serviceaccounts", "namespaces" ]
+    verbs: [ "get", "list", "watch", "create", "delete", "deletecollection", "patch", "update" ]
