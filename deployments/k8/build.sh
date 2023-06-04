@@ -16,25 +16,7 @@ function buildServiceImage() {
   docker build -t "k8/$service:latest" .
 }
 
-# Method to deploy a service to Kubernetes
-function deployService() {
-  local service=$1
-  local currentDir=$2
-
-  echo "Deploying service: $service"
-  cd "$currentDir/$service"
-
-  kubectl delete -f deployment.yaml
-  kubectl delete -f service.yaml
-
-  kubectl create -f deployment.yaml
-  kubectl create -f service.yaml
-}
-
-# Get the current directory
 currentDir=$(pwd)
-
-# Set the project directory two folders up from the current directory
 rootDir=$(dirname "$(dirname "$currentDir")")
 
 # Declare the SERVICES array
@@ -49,10 +31,3 @@ services=(
 for service in "${services[@]}"; do
   buildServiceImage "$service" "$rootDir"
 done
-
-kubectl create namespace wierd-arts --dry-run=client -o yaml | kubectl apply -f -
-
-# Deploy services to Kubernetes
-#for service in "${services[@]}"; do
-#  deployService "$service" "$currentDir"
-#done
