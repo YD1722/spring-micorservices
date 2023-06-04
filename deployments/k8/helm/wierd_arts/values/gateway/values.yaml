@@ -1,0 +1,17 @@
+namespace: wierd-arts
+
+serviceAccount:
+  create: true
+  name: wierd-arts-sa
+
+app:
+  name: gateway
+  image: k8/gateway:latest
+  env:
+    ENABLE_EUREKA: "false"
+
+service:
+  name: gateway
+  type: LoadBalancer
+  port: 9080
+  targetPort: 9080

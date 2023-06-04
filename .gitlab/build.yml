@@ -9,7 +9,7 @@ variables:
 build-gallery-service:
   extends: .maven-build
   variables:
-    SERVICE_NAME: gallery-service
+    SERVICE_NAME: gallery
 
 build-image-service:
   extends: .maven-build

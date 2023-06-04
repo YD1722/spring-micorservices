@@ -46,13 +46,13 @@ services=(
 )
 
 #Build Docker images for services
-#for service in "${services[@]}"; do
-#  buildServiceImage "$service" "$rootDir"
-#done
+for service in "${services[@]}"; do
+  buildServiceImage "$service" "$rootDir"
+done
 
 kubectl create namespace wierd-arts --dry-run=client -o yaml | kubectl apply -f -
 
 # Deploy services to Kubernetes
-for service in "${services[@]}"; do
-  deployService "$service" "$currentDir"
-done
+#for service in "${services[@]}"; do
+#  deployService "$service" "$currentDir"
+#done

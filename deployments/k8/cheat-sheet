@@ -1,2 +1,9 @@
+kubectl config set-context --current --namespace=wierd-arts
 kubectl get events
 kubectl describe deployment gateway
+
+kubectl port-forward service/gateway 9080:9080
+
+helm upgrade gateway wierd_arts/ --values wierd_arts/values/gateway/values.yaml -n wierd-arts
+helm upgrade gallery wierd_arts/ --values wierd_arts/values/gallery/values.yaml -n wierd-arts
+

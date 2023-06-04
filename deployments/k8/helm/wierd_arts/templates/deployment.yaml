@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.app.name }}
+  namespace: {{.Values.namespace}}
+  labels:
+    app: {{ .Values.app.name }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.app.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.app.name }}
+    spec:
+      serviceAccountName: {{.Values.serviceAccount.name}}
+      containers:
+        - name: {{ .Values.app.name }}
+          imagePullPolicy: Never
+          image: {{ .Values.app.image }}
+          env:
+              {{- range $key, $value := .Values.app.env }}
+            - name: "{{ $key }}"
+              value: "{{ $value }}"
+              {{- end }}

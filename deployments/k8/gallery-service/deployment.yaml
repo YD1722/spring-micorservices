@@ -17,7 +17,7 @@ spec:
     spec:
       serviceAccountName: gallery-sa
       containers:
-        - name: gallery-service
+        - name: gallery
           imagePullPolicy: Never
           image: k8/gallery-service:latest
           env:
