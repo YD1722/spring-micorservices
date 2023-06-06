@@ -30,8 +30,8 @@ services:
     container_name: pgadmin4-container
     restart: always
     environment:
-      PGADMIN_DEFAULT_EMAIL: yd@admin.com
-      PGADMIN_DEFAULT_PASSWORD: 123
+      - PGADMIN_DEFAULT_EMAIL=yd@admin.com
+      - PGADMIN_DEFAULT_PASSWORD=123
     ports:
       - '5050:80'
     volumes:
