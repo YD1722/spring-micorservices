@@ -16,11 +16,6 @@ import java.util.Random;
 @Component
 @Slf4j
 public class RabbitMQConsumer {
-//    @RabbitHandler
-//    public void receive(String message) {
-//        System.out.println("Received Message From RabbitMQ: " + message);
-//    }
-
     // TODO: How this log instance is available when annotate with slf4j
     @RabbitListener(queues = {"${app.queue.name}"}, ackMode = "MANUAL")
     public void consume(String message, Channel channel, @Header(AmqpHeaders.DELIVERY_TAG) long tag) throws IOException {
@@ -37,7 +32,6 @@ public class RabbitMQConsumer {
         } catch (Exception e) {
             log.error("error processing message image", e);
         }
-
     }
 
     private void validateImage() throws InvalidImageException {

@@ -1,15 +1,13 @@
 package com.example.imageservice.controllers;
 
+import com.example.imageservice.models.BulkImageUploadReq;
 import com.example.imageservice.models.Image;
 import com.example.imageservice.models.ImageUploadRequest;
 import com.example.imageservice.models.NotificationItem;
 import com.example.imageservice.services.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -34,8 +32,13 @@ public class ImageController {
     }
 
     @PostMapping("/process")
-    public void uploadImages(ImageUploadRequest imageUploadRequest) {
+    public void uploadImage(ImageUploadRequest imageUploadRequest) {
         notificationService.sendNotification(new NotificationItem("image-upload"));
+    }
+
+    @PostMapping("/simBulkProcess")
+    public void uploadImages(@RequestBody BulkImageUploadReq imageUploadRequest) {
+        notificationService.sendBulkNotifications(imageUploadRequest.count());
     }
 
     @GetMapping("/ping")

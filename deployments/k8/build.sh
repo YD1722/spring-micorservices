@@ -21,10 +21,10 @@ rootDir=$(dirname "$(dirname "$currentDir")")
 
 # Declare the SERVICES array
 services=(
-#  "gateway"
-#  "gallery-service"
+  "gateway"
+  "gallery-service"
   "image-service"
-#  "image-processing-service"
+  "image-processing-service"
 )
 
 #Build Docker images for services

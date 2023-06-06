@@ -21,4 +21,12 @@ public class NotificationService implements INotificationService {
     public void sendNotification(NotificationItem message) {
         rabbitTemplate.convertAndSend(rabbitMQConfig.getExchange(), rabbitMQConfig.getBindingKey(), message);
     }
+
+    public void sendBulkNotifications(int count) {
+        NotificationItem message = new NotificationItem("image-upload");
+
+        for (int i = 0; i < count; i++) {
+            rabbitTemplate.convertAndSend(rabbitMQConfig.getExchange(), rabbitMQConfig.getBindingKey(), message);
+        }
+    }
 }
