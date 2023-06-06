@@ -1,0 +1,20 @@
+namespace: wierd-arts
+
+serviceAccount:
+  create: false
+  name: wierd-arts-sa
+
+app:
+  name: image-processing-service
+  image: k8/image-processing-service:latest
+  env:
+    RABBIT_HOST: "host.minikube.internal"
+    RABBIT_PORT: "5672"
+    RABBIT_USER: "guest"
+    RABBIT_PASS: "guest"
+
+service:
+  name: image-processing-service
+  type: ClusterIP
+  port: 8400
+  targetPort: 8400

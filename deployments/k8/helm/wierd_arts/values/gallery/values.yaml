@@ -14,15 +14,9 @@ app:
     DATASOURCE_PASS: "postgres"
     DATASOURCE_DRIVER: "org.postgresql.Driver"
     DIALECT: "org.hibernate.dialect.PostgreSQLDialect"
-#\
 
 service:
   name: gallery-service
   type: ClusterIP
   port: 8100
   targetPort: 8100
-#
-#    - name: gateway
-#      type: LoadBalancer
-#      port: 9080
-#      targetPort: 9080

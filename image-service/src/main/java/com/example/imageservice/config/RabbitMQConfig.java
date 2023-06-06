@@ -23,6 +23,8 @@ public class RabbitMQConfig {
     private String queueName;
     private String exchange;
     private String bindingKey;
+    private String host;
+    private String port;
 
     @Bean
     Queue queue() {
@@ -42,13 +44,18 @@ public class RabbitMQConfig {
     @Bean
     @Primary
     public RabbitTemplate rabbitTemplate() {
-        // TODO: Connection factories
-
-        ConnectionFactory connectionFactory = new CachingConnectionFactory();
-
-        RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);
+        RabbitTemplate rabbitTemplate = new RabbitTemplate(ccf());
         rabbitTemplate.setMessageConverter(new Jackson2JsonMessageConverter());
 
         return rabbitTemplate;
+    }
+
+    @Bean
+    public CachingConnectionFactory ccf() {
+        CachingConnectionFactory ccf = new CachingConnectionFactory();
+
+        String address1 = host + ":" + port;
+        ccf.setAddresses(address1);
+        return ccf;
     }
 }

@@ -4,11 +4,21 @@ kubectl describe deployment gateway
 
 kubectl port-forward service/gateway 9080:9080
 
+kubectl logs -f -l app=image-processing-service
+
+---------------------------------
+
 helm install gateway wierd_arts/ --values wierd_arts/values/gateway/values.yaml -n wierd-arts
 helm install gallery wierd_arts/ --values wierd_arts/values/gallery/values.yaml -n wierd-arts
+helm install image wierd_arts/ --values wierd_arts/values/image/values.yaml -n wierd-arts
+helm install imagep wierd_arts/ --values wierd_arts/values/image-processing/values.yaml -n wierd-arts
 
 helm upgrade gateway wierd_arts/ --values wierd_arts/values/gateway/values.yaml -n wierd-arts
 helm upgrade gallery wierd_arts/ --values wierd_arts/values/gallery/values.yaml -n wierd-arts
+helm upgrade image wierd_arts/ --values wierd_arts/values/image/values.yaml -n wierd-arts
+helm upgrade imagep wierd_arts/ --values wierd_arts/values/image-processing/values.yaml -n wierd-arts
 
 helm uninstall gateway
 helm uninstall gallery
+helm uninstall image
+helm uninstall imagep
