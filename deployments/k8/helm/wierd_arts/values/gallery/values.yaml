@@ -5,19 +5,19 @@ serviceAccount:
   name: wierd-arts-sa
 
 app:
-  name: gallery
+  name: gallery-service
   image: k8/gallery-service:latest
   env:
     ENABLE_EUREKA: "false"
-    DATASOURCE_URL: "jdbc:h2:mem:testdb1"
-    DATASOURCE_USER: "sa"
-    DATASOURCE_PASS: "password1"
-    DATASOURCE_DRIVER: "org.h2.Driver"
-    DIALECT: "org.hibernate.dialect.H2Dialect"
+    DATASOURCE_URL: "jdbc:postgresql://host.minikube.internal:5432/wierd_arts"
+    DATASOURCE_USER: "postgres"
+    DATASOURCE_PASS: "postgres"
+    DATASOURCE_DRIVER: "org.postgresql.Driver"
+    DIALECT: "org.hibernate.dialect.PostgreSQLDialect"
 #\
 
 service:
-  name: gallery
+  name: gallery-service
   type: ClusterIP
   port: 8100
   targetPort: 8100

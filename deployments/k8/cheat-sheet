@@ -4,6 +4,9 @@ kubectl describe deployment gateway
 
 kubectl port-forward service/gateway 9080:9080
 
+helm install gateway wierd_arts/ --values wierd_arts/values/gateway/values.yaml -n wierd-arts
+helm install gallery wierd_arts/ --values wierd_arts/values/gallery/values.yaml -n wierd-arts
+
 helm upgrade gateway wierd_arts/ --values wierd_arts/values/gateway/values.yaml -n wierd-arts
 helm upgrade gallery wierd_arts/ --values wierd_arts/values/gallery/values.yaml -n wierd-arts
 

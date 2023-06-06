@@ -12,6 +12,8 @@ spec:
       app: {{ .Values.app.name }}
   template:
     metadata:
+      annotations:
+        timestamp: {{ now | quote }}
       labels:
         app: {{ .Values.app.name }}
     spec:
