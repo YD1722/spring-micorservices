@@ -1,0 +1,7 @@
+db-validate:
+  stage: post-deploy
+  script:
+    - terraform init
+    - terraform validate
+    - terraform plan --out plan
+    - terraform apply --auto-approve plan
