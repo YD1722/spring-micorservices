@@ -1,0 +1,68 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+        http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd">
+
+    <changeSet id="yd:3" author="your_name">
+        <insert tableName="employee">
+            <column name="id" valueNumeric="1"/>
+            <column name="name" value="John Doe"/>
+        </insert>
+        <insert tableName="employee">
+            <column name="id" valueNumeric="2"/>
+            <column name="name" value="Jane Smith"/>
+        </insert>
+        <insert tableName="employee">
+            <column name="id" valueNumeric="3"/>
+            <column name="name" value="Michael Johnson"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="yd:4" author="your_name">
+        <insert tableName="employee">
+            <column name="id" valueNumeric="4"/>
+            <column name="name" value="Test"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="yd:5" author="your_name">
+        <insert tableName="employee">
+            <column name="id" valueNumeric="5"/>
+            <column name="name" value="1Test"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="yd:6" author="your_name">
+        <insert tableName="role">
+            <column name="id" valueNumeric="1"/>
+            <column name="name" value="Admin"/>
+        </insert>
+        <insert tableName="role">
+            <column name="id" valueNumeric="2"/>
+            <column name="name" value="User"/>
+        </insert>
+        <insert tableName="role">
+            <column name="id" valueNumeric="3"/>
+            <column name="name" value="Guest"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="yd:7" author="your_name">
+        <insert tableName="employee">
+            <column name="id" valueNumeric="6"/>
+            <column name="name" value="12Test"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="yd:8" author="yashodha">
+        <insert tableName="employee">
+            <column name="id" valueNumeric="7"/>
+            <column name="name" value="12Testdad"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>
