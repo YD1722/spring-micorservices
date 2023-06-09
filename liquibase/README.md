@@ -22,6 +22,11 @@ liquibase --changelog-file=db/changelog/changelog.xml rollback-sql version1
 liquibase --changelog-file=db/changelog/changelog.xml rollback version1
 ```
 
+### Not so useful cli commands
+```
+liquibase --changelog-file=db/changelog/changelog.xml db-doc mychangelogDocs
+```
+
 ## Running as a Maven Build
 
 This can be helpful as part of your build process during development. Doing a Maven compile with the liquibase profile
@@ -89,3 +94,13 @@ database driver runtime dependency. Replace that with the database driver you ne
     <scope>runtime</scope>
 </dependency>
 ```
+
+## Best Practices
+Validating a Rollback
+To ensure safe and predictable rollbacks, test the rollback in a development environment. A complete test cycle should include:
+- Deploy the changes to the database then validate that they were deployed.
+- Roll back the changes, validate the changes were undone, and the database was brought back to the previous state.
+- Redeploy all changes to the database.
+
+
+The final step of redeploying the changes to the database is to verify that the rollback did not miss changes that would impact a future deployment. 
