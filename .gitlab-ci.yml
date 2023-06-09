@@ -9,6 +9,7 @@ stages:
   - test
   - post-build
   - deploy
+  - post-deploy
   - destroy
 
 workflow:
@@ -21,4 +22,5 @@ workflow:
 include:
   - local: '/.gitlab/build.yml'
   - local: '/.gitlab/deploy.yml'
+  - local: '/.gitlab/post-deploy.yml'
   - local: '/.gitlab/destroy.yml'
