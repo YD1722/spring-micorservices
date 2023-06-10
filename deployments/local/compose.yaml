@@ -1,3 +1,7 @@
+networks:
+  wierd_arts:
+    name: wierd_arts_network
+
 services:
   message-broker:
     build:
@@ -42,7 +46,3 @@ services:
 volumes:
   pgdata:
   pgadmindata:
-
-networks:
-  wierd_arts:
-    name: wierd_arts_network
