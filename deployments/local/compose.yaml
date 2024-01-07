@@ -1,19 +1,18 @@
 services:
-  message-broker:
-    build:
-      context: .
-      dockerfile: rabbit/Dockerfile
-    container_name: local-rabbit-broker
-    ports:
-      - "5672:5672"
-      - "15672:15672"
-    networks:
-      - wierd_arts
+#  message-broker:
+#    build:
+#      context: .
+#      dockerfile: rabbit/Dockerfile
+#    container_name: local-rabbit-broker
+#    ports:
+#      - "5672:5672"
+#      - "15672:15672"
+#    networks:
+#      - wierd_arts
 
   datasource:
     image: postgres:15.2-alpine
     container_name: local-postgres-db
-    restart: always
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
@@ -28,7 +27,7 @@ services:
   pgadmin:
     image: dpage/pgadmin4
     container_name: pgadmin4-container
-    restart: always
+#    restart: always
     environment:
       - PGADMIN_DEFAULT_EMAIL=yd@admin.com
       - PGADMIN_DEFAULT_PASSWORD=123

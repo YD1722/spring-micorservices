@@ -18,6 +18,27 @@ services:
       - KAFKA_CFG_INTER_BROKER_LISTENER_NAME=PLAINTEXT
     networks:
       - wierd_arts_infra
+
+  kafka-init:
+    image: docker.io/bitnami/kafka:3.6
+    networks:
+      - wierd_arts_infra
+    command: [ "/bin/bash", "-c", "/create_topic.sh" ]
+    environment:
+      # KRaft settings
+      - KAFKA_CFG_NODE_ID=0
+      - KAFKA_CFG_PROCESS_ROLES=controller,broker
+      - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@kafka:9093
+      - TEST_TOPIC_NAME=test
+    depends_on:
+      kafka:
+        condition: service_started
+    volumes:
+      - type: bind
+        source: ./kafka/init.sh
+        target: /create_topic.sh
+    init: true
+
   kafka-ui:
     depends_on:
       - kafka
@@ -34,4 +55,4 @@ volumes:
 
 networks:
   wierd_arts_infra:
-    name: wierd_arts_infra
+    name: wierd_arts_network
