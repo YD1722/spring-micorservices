@@ -17,7 +17,7 @@ spec:
       labels:
         app: {{ .Values.app.name }}
     spec:
-      serviceAccountName: {{.Values.serviceAccount.name}}
+{{/*      serviceAccountName: {{.Values.serviceAccount.name}}*/}}
       containers:
         - name: {{ .Values.app.name }}
           imagePullPolicy: Never

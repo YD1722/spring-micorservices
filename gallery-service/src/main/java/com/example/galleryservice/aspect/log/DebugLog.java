@@ -1,4 +1,4 @@
-package com.example.galleryservice.aspect;
+package com.example.galleryservice.aspect.log;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -6,6 +6,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.FIELD})
-public @interface Masked {
+@Target({ElementType.METHOD, ElementType.FIELD})
+public @interface DebugLog {
 }

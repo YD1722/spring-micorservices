@@ -14,7 +14,7 @@ helm install image wierd_arts/ --values wierd_arts/values/image/values.yaml -n w
 helm install imagep wierd_arts/ --values wierd_arts/values/image-processing/values.yaml -n wierd-arts
 
 helm upgrade gateway wierd_arts/ --values wierd_arts/values/gateway/values.yaml -n wierd-arts
-helm upgrade gallery wierd_arts/ --values wierd_arts/values/gallery/values.yaml -n wierd-arts
+ug
 helm upgrade image wierd_arts/ --values wierd_arts/values/image/values.yaml -n wierd-arts
 helm upgrade imagep wierd_arts/ --values wierd_arts/values/image-processing/values.yaml -n wierd-arts
 

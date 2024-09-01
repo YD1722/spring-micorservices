@@ -1,4 +1,4 @@
-package com.example.galleryservice.aspect;
+package com.example.galleryservice.aspect.audit;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

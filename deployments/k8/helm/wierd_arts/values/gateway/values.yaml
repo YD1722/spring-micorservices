@@ -6,7 +6,7 @@ serviceAccount:
 
 app:
   name: gateway
-  image: k8/gateway:latest
+  image: wierd-arts/gateway:latest
   env:
     ENABLE_EUREKA: "false"
 

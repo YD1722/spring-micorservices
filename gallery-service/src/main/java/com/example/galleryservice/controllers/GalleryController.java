@@ -1,6 +1,7 @@
 package com.example.galleryservice.controllers;
 
-import com.example.galleryservice.aspect.Audit;
+import com.example.galleryservice.aspect.audit.Audit;
+import com.example.galleryservice.aspect.log.DebugLog;
 import com.example.galleryservice.exceptions.GalleryServiceException;
 import com.example.galleryservice.models.Gallery;
 import com.example.galleryservice.services.GalleryService;
@@ -40,7 +41,6 @@ public class GalleryController {
 
     // -------- Admin Area --------
     // This method should only be accessed by users with role of 'admin'
-    @Audit("gallery_update")
     @PutMapping
     public ResponseEntity updateGallery(@RequestBody Gallery gallery) {
         try {
@@ -54,8 +54,19 @@ public class GalleryController {
     }
 
     // TODO: Why make this variable final
-    @GetMapping("/{id}")
-    public Gallery getGallery(@PathVariable final long id) {
+    @GetMapping("/image/{id}")
+    public Gallery getImage(@PathVariable final long id) {
+        try {
+            return galleryService.getGalleryById(id);
+        } catch (GalleryServiceException e) {
+            // TODO: Only checking the behavior of swagger doc here. update this
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST, "Error creating new gallery", e);
+        }
+    }
+
+    @GetMapping("/video/{id}")
+    public Gallery getVideo(@PathVariable final long id) {
         try {
             return galleryService.getGalleryById(id);
         } catch (GalleryServiceException e) {
@@ -66,7 +77,8 @@ public class GalleryController {
     }
 
     @GetMapping("/ping")
+    @Audit(operation = "health-check")
     public String healthCheck() {
-        return "Ping from Gallery Service running at port: " + env.getProperty("local.server.port");
+        return "Hello !!, Gallery Service running at port: " + env.getProperty("local.server.port");
     }
 }
